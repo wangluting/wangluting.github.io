@@ -1,0 +1,688 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Chapter 4 Trees and Graphs树和图是面试中经常被问到的两种数据结构，常以一下两种方式出现：
+
+Implement a tree/find a node/delete a node/other well known algorithm
+Implement a modification of a known algorithm在面试前，务必理解掌握树的相关算法。
+
+实现Tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ctci 读书笔记（五）">
+<meta property="og:url" content="http://yoursite.com/2016/05/27/C4/index.html">
+<meta property="og:site_name" content="Luting's blog">
+<meta property="og:description" content="Chapter 4 Trees and Graphs树和图是面试中经常被问到的两种数据结构，常以一下两种方式出现：
+
+Implement a tree/find a node/delete a node/other well known algorithm
+Implement a modification of a known algorithm在面试前，务必理解掌握树的相关算法。
+
+实现Tree">
+<meta property="og:updated_time" content="2016-05-27T09:40:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ctci 读书笔记（五）">
+<meta name="twitter:description" content="Chapter 4 Trees and Graphs树和图是面试中经常被问到的两种数据结构，常以一下两种方式出现：
+
+Implement a tree/find a node/delete a node/other well known algorithm
+Implement a modification of a known algorithm在面试前，务必理解掌握树的相关算法。
+
+实现Tree">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Ctci 读书笔记（五） | Luting's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luting's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-technology">
+          <a href="/technology" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-thumbs-up"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ctci 读书笔记（五）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-27T17:36:29+08:00" content="2016-05-27">
+              2016-05-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/27/C4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/27/C4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter-4-Trees-and-Graphs"><a href="#Chapter-4-Trees-and-Graphs" class="headerlink" title="Chapter 4 Trees and Graphs"></a>Chapter 4 Trees and Graphs</h2><p>树和图是面试中经常被问到的两种数据结构，常以一下两种方式出现：</p>
+<ul>
+<li>Implement a tree/find a node/delete a node/other well known algorithm</li>
+<li>Implement a modification of a known algorithm<br>在面试前，务必理解掌握树的相关算法。</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h4><p>需要注意的是，对于binary tree,面试者经常会把它默认为binary search tree, 然而面试官经常就只是指的是binary tree. 因此面试者要仔细听是否有关键词”search”.实在不清楚的话，需要向面试官提问。<br>关于二叉树，必须熟练掌握的算法：</p>
+<ul>
+<li>先序遍历(Pre-order)</li>
+<li>中序遍历(In-order)</li>
+<li>后序遍历(Post-order)</li>
+<li>插入节点(向二叉搜索树中插入节点，和根节点比较，如果大于根节点就向右遍历，小于根节点就向左遍历，直到找到一个空位插入。虽然二叉搜索树中节点的调整和删除很少在面试中出现，但是如果你知道具体是如何做的，会让你的表现较其他面试者更加突出)</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先序遍历</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> TreeNode &#123;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	TreeNode* left;</span><br><span class="line">	TreeNode* right;</span><br><span class="line">	TreeNode(<span class="keyword">int</span> val) :value(val),left(<span class="literal">NULL</span>),right(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorderRecursive</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; head-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	preorderRecursive(head-&gt;left);</span><br><span class="line">	preorderRecursive(head-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归实现</span></span><br><span class="line"><span class="comment">//非递归先序遍历在第一次访问到节点的时候输出节点，并且从该节点向左和向右依次遍历。因此需要用到一个数据结构可以保存节点信息的，当从左子树返回时可以引导到右子树。stack LIFO的特性可以作为这样的数据结构</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorderIterative</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">	TreeNode* p = head;</span><br><span class="line">	<span class="keyword">while</span> (!s.empty() || p) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p) &#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			s.push(p);</span><br><span class="line">			p = p-&gt;left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			p = s.top();</span><br><span class="line">			s.pop();</span><br><span class="line">			p = p-&gt;right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="comment">//递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorderRecursive</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	inorderRecursive(head-&gt;left);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; head-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	inorderRecursive(head-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//非递归实现</span></span><br><span class="line"><span class="comment">//非递归中序遍历在第二次访问节点的时候输出节点，因此需要先用栈来保存节点信息，当某一个节点从栈中弹出的时候，就表示该节点已经从左子树中返回，此时访问该节点，并且继续向右遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorderIterative</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">	TreeNode* p = head;</span><br><span class="line">	<span class="keyword">while</span> (p || !s.empty()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p) &#123;</span><br><span class="line">			s.push(p);</span><br><span class="line">			p = p-&gt;left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			p = s.top();</span><br><span class="line">			s.pop();</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			p = p-&gt;right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="comment">//递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postorderRecursive</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	postorderRecursive(head-&gt;left);</span><br><span class="line">	postorderRecursive(head-&gt;right);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; head-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//非递归实现</span></span><br><span class="line"><span class="comment">//非递归后序遍历较前两种遍历方式特殊。由于节点是在最后一次访问的时候输出的，因此访问完所有的左子树，在第二次访问节点的时候，不能将节点输出并从栈内弹出，需要继续向右访问。因此我们无法判断节点是否已经访问过右子树，只有访问过右子树才可以从栈中弹出并输出。因此需要pLastVisit来标志上一个访问节点是不是来自于右子树</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postorderIterative</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">	TreeNode* p = head;</span><br><span class="line">	<span class="keyword">while</span> (p) &#123;</span><br><span class="line">		s.push(p);</span><br><span class="line">		p = p-&gt;left; <span class="comment">//刚开始一直遍历到左子树的最下端</span></span><br><span class="line">	&#125;</span><br><span class="line">	TreeNode* lastVisit = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span> (!s.empty()) &#123;</span><br><span class="line">		p = s.top();</span><br><span class="line">		s.pop();</span><br><span class="line">		<span class="keyword">if</span> (p-&gt;right == <span class="literal">NULL</span> || p-&gt;right == lastVisit) &#123; <span class="comment">//如果右子树为空或者右子树已访问过，可以直接输出</span></span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			lastVisit = p;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;  <span class="comment">//说明右子树不为空且右子树没有被访问过，此时应该再把节点压栈，然后</span></span><br><span class="line">			s.push(p);</span><br><span class="line">			p = p-&gt;right;</span><br><span class="line">			<span class="keyword">while</span> (p) &#123;</span><br><span class="line">				s.push(p);</span><br><span class="line">				p = p-&gt;left;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//后续遍历还有另外一种实现方法</span></span><br><span class="line"><span class="comment">//对于每一节点，首先将它入栈</span></span><br><span class="line"><span class="comment">//然后如果该节点没有左右孩子或者左右孩子都被访问过了，则输出</span></span><br><span class="line"><span class="comment">//否则将其右孩子，左孩子依次入栈</span></span><br><span class="line"><span class="comment">//这样可以保证每次取栈顶元素的时候，左孩子在右孩子之前被输出</span></span><br><span class="line"><span class="comment">//而且在根节点被输出前，左右孩子已经输出</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postorderIterative2</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">	TreeNode* p = head;</span><br><span class="line">	s.push(p);</span><br><span class="line">	TreeNode* lastVisit = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span> (!s.empty()) &#123;</span><br><span class="line">		p = s.top();</span><br><span class="line">		s.pop();</span><br><span class="line">		<span class="keyword">if</span> ((p-&gt;left == <span class="literal">NULL</span> &amp;&amp; p-&gt;right == <span class="literal">NULL</span>) || (lastVisit &amp;&amp; (p-&gt;left == lastVisit || p-&gt;right == lastVisit))) &#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			lastVisit = p;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			s.push(p);</span><br><span class="line">			<span class="keyword">if</span> (p-&gt;right) s.push(p-&gt;right);</span><br><span class="line">			<span class="keyword">if</span> (p-&gt;left) s.push(p-&gt;left);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//层次遍历</span></span><br><span class="line"><span class="comment">//使用队列这种数据结构FIFO，就可以按照访问顺序打印节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">layerReverse</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">queue</span>&lt;TreeNode*&gt; q;</span><br><span class="line">    TreeNode* p = head;</span><br><span class="line">    q.push(p);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">        p = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;left) q.push(p-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;right) q.push(p-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//向Binary search tree中插入节点</span></span><br><span class="line"><span class="comment">//递归</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">insertToBSTRecursive</span><span class="params">(TreeNode* &amp;head, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        TreeNode* newNode = <span class="keyword">new</span> TreeNode(value);</span><br><span class="line">        head = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(value &lt; head-&gt;value) &#123;</span><br><span class="line">            head-&gt;left = insertToBSTRecursive(head-&gt;left, value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            head-&gt;right = insertToBSTRecursive(head-&gt;right, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertToBSTIterative</span><span class="params">(TreeNode* &amp;head, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    TreeNode* newNode = <span class="keyword">new</span> TreeNode(value);</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) &#123;head = newNode;&#125;</span><br><span class="line">    TreeNode* p = head;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        <span class="keyword">if</span>(value &lt; p-&gt;value) &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;left==<span class="literal">NULL</span>) &#123;</span><br><span class="line">                p-&gt;left = newNode;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                p = p-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;right==<span class="literal">NULL</span>) &#123;</span><br><span class="line">                p-&gt;right = newNode;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                p = p-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//平衡二叉树插入节点的调整</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getHeight</span><span class="params">(TreeNode* p)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (p == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> p-&gt;height;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode* <span class="title">singleLeftRotation</span><span class="params">(TreeNode* p)</span> </span>&#123;</span><br><span class="line">	TreeNode* newRoot = p-&gt;left;</span><br><span class="line">	p-&gt;left = newRoot-&gt;right;</span><br><span class="line">	newRoot-&gt;right = p;</span><br><span class="line">	p-&gt;height = max(getHeight(p-&gt;left), getHeight(p-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">	newRoot-&gt;height = max(getHeight(newRoot-&gt;left), p-&gt;height) + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> newRoot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">TreeNode* <span class="title">singleRightRotation</span><span class="params">(TreeNode* p)</span> </span>&#123;</span><br><span class="line">	TreeNode* newRoot = p-&gt;right;</span><br><span class="line">	p-&gt;right = newRoot-&gt;left;</span><br><span class="line">	newRoot-&gt;left = p;</span><br><span class="line">	p-&gt;height = max(getHeight(p-&gt;left), getHeight(p-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">	newRoot-&gt;height = max(getHeight(newRoot-&gt;right), p-&gt;height) + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> newRoot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode* <span class="title">doubleLRRotation</span><span class="params">(TreeNode* p)</span> </span>&#123;</span><br><span class="line">	p-&gt;left = singleRightRotation(p-&gt;left);</span><br><span class="line">	<span class="keyword">return</span> singleLeftRotation(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode* <span class="title">doubleRLRotation</span><span class="params">(TreeNode* p)</span> </span>&#123;</span><br><span class="line">	p-&gt;right = singleLeftRotation(p-&gt;right);</span><br><span class="line">	<span class="keyword">return</span> singleRightRotation(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode* <span class="title">avlInsertion</span><span class="params">(TreeNode* &amp;head, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		head = <span class="keyword">new</span> TreeNode(value);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (value &lt; head-&gt;value) &#123;</span><br><span class="line">		head-&gt;left = avlInsertion(head-&gt;left, value);</span><br><span class="line">		<span class="keyword">if</span> (getHeight(head-&gt;left) - getHeight(head-&gt;right) == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (value &lt; head-&gt;left-&gt;value)</span><br><span class="line">				head = singleLeftRotation(head); <span class="comment">//左单旋</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				head = doubleLRRotation(head); <span class="comment">//左右双旋</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (value &gt; head-&gt;value) &#123;</span><br><span class="line">		head-&gt;right = avlInsertion(head-&gt;right, value);</span><br><span class="line">		<span class="keyword">if</span> (getHeight(head-&gt;left) - getHeight(head-&gt;right) == <span class="number">-2</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (value &gt; head-&gt;right-&gt;value)</span><br><span class="line">				head = singleRightRotation(head); <span class="comment">//右单旋</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				head = doubleRLRotation(head); <span class="comment">//右左双旋</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	head-&gt;height = max(getHeight(head-&gt;left), getHeight(head-&gt;right)) + <span class="number">1</span>; <span class="comment">//更新树高</span></span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h4><p>必须熟练掌握的算法：</p>
+<ul>
+<li>深度优先搜索(DFS) 相当于树的先序遍历</li>
+<li>广度优先搜索(BFS) 相当于树的层序遍历</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//图的两种遍历</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VERTEX 8 <span class="comment">//节点的个数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EDGE 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> GraphNode &#123;</span><br><span class="line">	<span class="keyword">int</span> vertex;</span><br><span class="line">	GraphNode* next;</span><br><span class="line">	GraphNode(<span class="keyword">int</span> num = <span class="number">0</span>) :vertex(num), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> isVisit[VERTEX]; <span class="comment">//标记每个节点是否被访问</span></span><br><span class="line">GraphNode graph[VERTEX];  <span class="comment">//头结点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//建图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createGraph</span><span class="params">(<span class="keyword">int</span> Graph[VERTEX][<span class="number">2</span>], <span class="keyword">int</span> num)</span> </span>&#123; <span class="comment">//建立邻接表 num是边数</span></span><br><span class="line">	<span class="keyword">while</span> (num--) &#123;</span><br><span class="line">		<span class="keyword">int</span> from = Graph[num][<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">int</span> to = Graph[num][<span class="number">1</span>];</span><br><span class="line">		GraphNode* newNode = <span class="keyword">new</span> GraphNode(to);</span><br><span class="line">		GraphNode* g = &amp;graph[from];</span><br><span class="line">		<span class="keyword">while</span> (g-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">			g = g-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		g-&gt;next = newNode;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//深度优先遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> vertex)</span> </span>&#123;</span><br><span class="line">	isVisit[vertex] = <span class="literal">true</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; vertex &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	GraphNode* p = &amp;graph[vertex];</span><br><span class="line">	p = p-&gt;next;</span><br><span class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!isVisit[p-&gt;vertex]) dfs(p-&gt;vertex); <span class="comment">//对于每一个node的邻居，没有访问过则访问</span></span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//广度优先遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> vertex)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	q.push(vertex);</span><br><span class="line">	isVisit[vertex] = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">		<span class="keyword">int</span> vertex = q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; vertex &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		GraphNode* p = &amp;graph[vertex];</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">		<span class="keyword">while</span> (p) &#123;</span><br><span class="line">			<span class="keyword">if</span> (!isVisit[p-&gt;vertex]) &#123;</span><br><span class="line">				q.push(p-&gt;vertex);</span><br><span class="line">				isVisit[p-&gt;vertex] = <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> node[EDGE][<span class="number">2</span>] = &#123; &#123; <span class="number">0</span>, <span class="number">1</span> &#125;,&#123; <span class="number">1</span>, <span class="number">2</span> &#125;,</span><br><span class="line">	&#123; <span class="number">0</span>, <span class="number">2</span> &#125;,&#123; <span class="number">2</span>, <span class="number">0</span> &#125;,</span><br><span class="line">	&#123; <span class="number">0</span>, <span class="number">3</span> &#125;,&#123; <span class="number">3</span>, <span class="number">0</span> &#125;,</span><br><span class="line">	&#123; <span class="number">1</span>, <span class="number">4</span> &#125;,&#123; <span class="number">4</span>, <span class="number">1</span> &#125;,</span><br><span class="line">	&#123; <span class="number">1</span>, <span class="number">5</span> &#125;,&#123; <span class="number">5</span>, <span class="number">1</span> &#125;,</span><br><span class="line">	&#123; <span class="number">2</span>, <span class="number">6</span> &#125;,&#123; <span class="number">6</span>, <span class="number">2</span> &#125;,</span><br><span class="line">	&#123; <span class="number">3</span>, <span class="number">6</span> &#125;,&#123; <span class="number">6</span>, <span class="number">3</span> &#125;,</span><br><span class="line">	&#123; <span class="number">4</span>, <span class="number">7</span> &#125;,&#123; <span class="number">7</span>, <span class="number">4</span> &#125;,</span><br><span class="line">	&#123; <span class="number">5</span>, <span class="number">6</span> &#125;,&#123; <span class="number">6</span>, <span class="number">5</span> &#125;,</span><br><span class="line">	&#123; <span class="number">6</span>, <span class="number">7</span> &#125;,&#123; <span class="number">7</span>, <span class="number">6</span> &#125; &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; VERTEX; i++) &#123; <span class="comment">//初始化</span></span><br><span class="line">		graph[i].vertex = i;</span><br><span class="line">		isVisit[i] = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	createGraph(node, <span class="number">20</span>);</span><br><span class="line">	dfs(<span class="number">0</span>);  <span class="comment">//0,3,6,7,4,1,5,2</span></span><br><span class="line">	bfs(<span class="number">0</span>); <span class="comment">//0,3,2,1,6,5,4,7</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="4-1-Implement-a-function-to-check-if-a-tree-is-banlanced-For-the-purpose-of-this-question-a-balanced-tree-is-defined-to-be-a-tree-such-that-no-two-leaf-nodes-differ-in-distance-from-the-root-by-more-than-one"><a href="#4-1-Implement-a-function-to-check-if-a-tree-is-banlanced-For-the-purpose-of-this-question-a-balanced-tree-is-defined-to-be-a-tree-such-that-no-two-leaf-nodes-differ-in-distance-from-the-root-by-more-than-one" class="headerlink" title="4.1 Implement a function to check if a tree is banlanced. For the purpose of this question, a balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one"></a><strong>4.1 Implement a function to check if a tree is banlanced. For the purpose of this question, a balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断一个树是否平衡</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> TreeNode &#123;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	TreeNode* left;</span><br><span class="line">	TreeNode* right;</span><br><span class="line">	TreeNode(<span class="keyword">int</span> val = <span class="number">0</span>) : value(val), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归法</span></span><br><span class="line"><span class="comment">// 一个树是平衡的需要满足两点：1. 左右子树都平衡 2. 左右子树的高度差不超过1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getHeight</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">std</span>::max(getHeight(root-&gt;left), getHeight(root-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">int</span> diff = getHeight(root-&gt;left) - getHeight(root-&gt;right);</span><br><span class="line">	<span class="keyword">if</span> (diff &gt; <span class="number">1</span> || diff &lt; <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span>(isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  上述方法在算树高的时候，每个结点深度都被计算多次，不高效</span></span><br><span class="line"><span class="comment">// 如果在遍历到每个节点的时候，已经保存了它左右两边的高度差，就可以直接判断</span></span><br><span class="line"><span class="comment">// 采用后序遍历可以实现</span></span><br><span class="line"><span class="comment">// 因为后序遍历访问节点的时候，已经访问了它左右两边的节点，因此我们可以一边遍历一边判断是否平衡</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="keyword">int</span>&amp; depth)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		depth = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> left, right, diff;</span><br><span class="line">	<span class="keyword">if</span> (helper(root-&gt;left, left) &amp;&amp; helper(root-&gt;right, right)) &#123;</span><br><span class="line">		diff = left - right;</span><br><span class="line">		<span class="keyword">if</span> (diff &gt;= <span class="number">-1</span> &amp;&amp; diff &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">			depth = <span class="built_in">std</span>::max(left, right) + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBalanced2</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> depth;</span><br><span class="line">	<span class="keyword">return</span> helper(root, depth);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 书上给出的方法：</span></span><br><span class="line"><span class="comment">// 如果一个数是平衡的，那么从根节点到叶子节点的最大距离与最小距离的差值不能超过1.</span></span><br><span class="line"><span class="comment">// 只考虑根节点的距离差异，是因为根节点的距离差异是所有节点距离差异可能的最大值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">std</span>::max(maxDepth(root-&gt;left), maxDepth(root-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">std</span>::min(minDepth(root-&gt;left), minDepth(root-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (maxDepth(root) - minDepth(root) &lt;= <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-Given-a-directed-graph-design-an-algorithm-to-find-out-whether-there-is-a-route-between-two-nodes"><a href="#4-2-Given-a-directed-graph-design-an-algorithm-to-find-out-whether-there-is-a-route-between-two-nodes" class="headerlink" title="4.2 Given a directed graph, design an algorithm to find out whether there is a route between two nodes"></a><strong>4.2 Given a directed graph, design an algorithm to find out whether there is a route between two nodes</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VERTEX 10</span></span><br><span class="line"><span class="comment">// 给两个节点，判断它们之间是否有路径</span></span><br><span class="line"><span class="comment">// 考查的是图的遍历，可以用BFS或者DFS</span></span><br><span class="line"><span class="keyword">struct</span> GraphNode &#123;</span><br><span class="line">	<span class="keyword">int</span> vertex;</span><br><span class="line">	GraphNode* next;</span><br><span class="line">	GraphNode(<span class="keyword">int</span> num = <span class="number">0</span>) :vertex(num), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> isVisit[VERTEX];</span><br><span class="line">GraphNode graph[VERTEX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasRoute</span><span class="params">(GraphNode* from, GraphNode* to)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (from-&gt;vertex == to-&gt;vertex) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	isVisit[from-&gt;vertex] = <span class="literal">true</span>;</span><br><span class="line">	GraphNode* node = &amp;graph[from-&gt;vertex];</span><br><span class="line">	node = node-&gt;next;</span><br><span class="line">	GraphNode* flag = node; <span class="comment">//避免有环的情况</span></span><br><span class="line">	<span class="keyword">while</span> (node) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!isVisit[node-&gt;vertex]) &#123;</span><br><span class="line">			<span class="keyword">if</span> (hasRoute(node, to)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		node = node-&gt;next;</span><br><span class="line">		<span class="keyword">if</span> (node == flag) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-3-Given-a-sorted-increasing-order-array-write-an-algorithm-to-create-a-binary-tree-with-minumal-height"><a href="#4-3-Given-a-sorted-increasing-order-array-write-an-algorithm-to-create-a-binary-tree-with-minumal-height" class="headerlink" title="4.3 Given a sorted(increasing order) array, write an algorithm to create a binary tree with minumal height"></a><strong>4.3 Given a sorted(increasing order) array, write an algorithm to create a binary tree with minumal height</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过一个有序数组构建一个高度最小的树</span></span><br><span class="line"><span class="comment">// 当每个节点左右子树的高度相等时，这棵树是最小的</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> TreeNode &#123;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	TreeNode* left;</span><br><span class="line">	TreeNode* right;</span><br><span class="line">	TreeNode(<span class="keyword">int</span> val = <span class="number">0</span>) : value(val), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode* <span class="title">helper</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = left + (right-left)/<span class="number">2</span>;</span><br><span class="line">    TreeNode* newNode = <span class="keyword">new</span> TreeNode(<span class="built_in">array</span>[mid]);</span><br><span class="line">    newNode-&gt;left = helper(<span class="built_in">array</span>, left, mid<span class="number">-1</span>);</span><br><span class="line">    newNode-&gt;right = helper(<span class="built_in">array</span>, mid+<span class="number">1</span>, right);</span><br><span class="line">    <span class="keyword">return</span> newNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode* <span class="title">createMinBST</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">0</span> || <span class="built_in">array</span> == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> helper(<span class="built_in">array</span>, <span class="number">0</span>, length<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/25/intership/" rel="next" title="找实习的那些日子    --善待挫折">
+                <i class="fa fa-chevron-left"></i> 找实习的那些日子    --善待挫折
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/14/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/27/C4/"
+           data-title="Ctci 读书笔记（五）" data-url="http://yoursite.com/2016/05/27/C4/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.JPG"
+               alt="Luting" />
+          <p class="site-author-name" itemprop="name">Luting</p>
+          <p class="site-description motion-element" itemprop="description">程序媛的日常</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-Trees-and-Graphs"><span class="nav-number">1.</span> <span class="nav-text">Chapter 4 Trees and Graphs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">1.1.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tree"><span class="nav-number">1.1.1.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Graph"><span class="nav-number">1.1.2.</span> <span class="nav-text">Graph</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.2.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-Implement-a-function-to-check-if-a-tree-is-banlanced-For-the-purpose-of-this-question-a-balanced-tree-is-defined-to-be-a-tree-such-that-no-two-leaf-nodes-differ-in-distance-from-the-root-by-more-than-one"><span class="nav-number">1.2.1.</span> <span class="nav-text">4.1 Implement a function to check if a tree is banlanced. For the purpose of this question, a balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-Given-a-directed-graph-design-an-algorithm-to-find-out-whether-there-is-a-route-between-two-nodes"><span class="nav-number">1.2.2.</span> <span class="nav-text">4.2 Given a directed graph, design an algorithm to find out whether there is a route between two nodes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-Given-a-sorted-increasing-order-array-write-an-algorithm-to-create-a-binary-tree-with-minumal-height"><span class="nav-number">1.2.3.</span> <span class="nav-text">4.3 Given a sorted(increasing order) array, write an algorithm to create a binary tree with minumal height</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016.5 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luting</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luting"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

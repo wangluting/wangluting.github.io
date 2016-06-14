@@ -1,0 +1,656 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Chapter 2 Linked Lists实现：链表操作在面试中很常见。链表和数组最大的区别是插入和删除节点的时间复杂度是O(1)，而查找的时间复杂度是O(N)。面试者必须掌握如何创建一个链表，插入，删除一个节点。C++ STL中list实现了双向链表的功能。以下是例子：123456789101112131415161718192021222324252627282930313233343536">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ctci 读书笔记（三）">
+<meta property="og:url" content="http://yoursite.com/2016/05/17/C2/index.html">
+<meta property="og:site_name" content="Luting's blog">
+<meta property="og:description" content="Chapter 2 Linked Lists实现：链表操作在面试中很常见。链表和数组最大的区别是插入和删除节点的时间复杂度是O(1)，而查找的时间复杂度是O(N)。面试者必须掌握如何创建一个链表，插入，删除一个节点。C++ STL中list实现了双向链表的功能。以下是例子：123456789101112131415161718192021222324252627282930313233343536">
+<meta property="og:updated_time" content="2016-05-17T15:42:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ctci 读书笔记（三）">
+<meta name="twitter:description" content="Chapter 2 Linked Lists实现：链表操作在面试中很常见。链表和数组最大的区别是插入和删除节点的时间复杂度是O(1)，而查找的时间复杂度是O(N)。面试者必须掌握如何创建一个链表，插入，删除一个节点。C++ STL中list实现了双向链表的功能。以下是例子：123456789101112131415161718192021222324252627282930313233343536">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Ctci 读书笔记（三） | Luting's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luting's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-technology">
+          <a href="/technology" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-thumbs-up"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ctci 读书笔记（三）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T23:33:11+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/C2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/C2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter-2-Linked-Lists"><a href="#Chapter-2-Linked-Lists" class="headerlink" title="Chapter 2 Linked Lists"></a>Chapter 2 Linked Lists</h2><h3 id="实现："><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3><p>链表操作在面试中很常见。链表和数组最大的区别是插入和删除节点的时间复杂度是O(1)，而查找的时间复杂度是O(N)。面试者必须掌握如何创建一个链表，插入，删除一个节点。<br>C++ STL中list实现了双向链表的功能。以下是例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Constructor</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l1; <span class="comment">//empty list</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l2(<span class="number">4</span>, <span class="number">1</span>); <span class="comment">// 4 ints with value 1</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l3(l2.begin(), l2.end()); <span class="comment">//iterating through l2</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l4&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;; <span class="comment">// 3 ints with values 1,2,3</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Iterator</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">    <span class="keyword">for</span>(it = l4.begin(); it != l4.end(); it++) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Add and delete last element </span></span><br><span class="line">    l4.push_back(<span class="number">4</span>);</span><br><span class="line">    l4.push_back(<span class="number">5</span>);</span><br><span class="line">    l4.pop_back();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Add and delete first element</span></span><br><span class="line">    l4.push_front(<span class="number">0</span>);</span><br><span class="line">    l4.push_front(<span class="number">-1</span>);</span><br><span class="line">    l4.pop_front();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Access first and last element</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"First element of l4 is: "</span> &lt;&lt; l4.front &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Last element of l4 is: "</span> &lt;&lt; <span class="number">14.</span>back() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Assign new content </span></span><br><span class="line">    l1 = l4;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Size of l1: "</span> &lt;&lt; l1.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">    l4.assign(l2.begin(), l2.end());</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Size of l4: "</span> &lt;&lt; l4.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Insert and erase element at any position</span></span><br><span class="line">    l4.insert(l4.begin()+<span class="number">3</span>, <span class="number">10</span>);</span><br><span class="line">    l4.erase(l4.end()<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>复杂的链表操作并不常见，而且我们需要链表的时候一般是自己实现一个链表：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Node &#123;</span><br><span class="line">    Node* next;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    Node(<span class="keyword">int</span> val):value(val), next(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//往链表的末尾添加新结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addToTail</span><span class="params">(Node* &amp;head, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">// 这里要注意，head是一个引用指针类型。因为如果链表为空，那么我们往里面插入一个节点，就会改变头指针。因此必须把head设置为可以改变指针值的指针，否则出了这个函数head仍然是一个空指针</span></span><br><span class="line">    Node* newNode = <span class="keyword">new</span> Node(val);</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        head = newNode; <span class="comment">// 容易忽略往空链表插入节点的情况</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node* p = head;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>) p = p-&gt;next;</span><br><span class="line">        p-&gt;next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个指定值的结点</span></span><br><span class="line"><span class="comment">// 分别考虑删除的是头结点，中间结点和尾结点的情况</span></span><br><span class="line"><span class="comment">// 同时要考虑到链表不含指定值的情况,以及空链表的情况</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteOfTail</span><span class="params">(Node* &amp;head, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//同理，头指针也要设置为引用类型，因为有可能被改变</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    Node* pdelete = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(head-&gt;value == val) &#123; <span class="comment">//删除的是头结点</span></span><br><span class="line">        pdelete = head;</span><br><span class="line">        head = head-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node* p = head;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; p-&gt;next-&gt;value != val) &#123; <span class="comment">//循环跳出有两种条件：一是走到了末尾仍没有找到指定值，二是找到了指定值；尾结点和中间节点可以合并</span></span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; p-&gt;next-&gt;value == val) &#123;</span><br><span class="line">            pdelete = p-&gt;next;</span><br><span class="line">            p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pdelete!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> pdelete;</span><br><span class="line">        pdelete = <span class="literal">NULL</span>; <span class="comment">//set pointer to NULL after deletion</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><h4 id="2-1-Write-code-to-remove-duplicates-from-an-unsorted-linked-list-FOLLOW-UP-How-would-you-solve-this-problem-if-a-temporary-buffer-is-not-allowed"><a href="#2-1-Write-code-to-remove-duplicates-from-an-unsorted-linked-list-FOLLOW-UP-How-would-you-solve-this-problem-if-a-temporary-buffer-is-not-allowed" class="headerlink" title="2.1 Write code to remove duplicates from an unsorted linked list. FOLLOW UP: How would you solve this problem if a temporary buffer is not allowed?"></a><strong>2.1 Write code to remove duplicates from an unsorted linked list. FOLLOW UP: How would you solve this problem if a temporary buffer is not allowed?</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这道题和1.3基本一模一样，只是数据结构从数组变成了链表， 并且没有指明元素的类型，假设是int。同样可以运用1.3的方法。需要注意的是，由于链表删除能做到O(1),因此不必使用两个指针复制来模拟删除，可以直接在原始链表上删除。因此如果使用额外空间，可以无需使用两个指针并在O(N)时间复杂度下完成；如果不允许使用额外数组空间，那么对于每个结点，是不知道之前出现过没有的，因此需要从头遍历到该节点然后删除出现过的节点；也可以使用向后遍历的做法，对于每个结点，向后遍历删除出现过的节点，时间复杂度为O(N^2)。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 开一个数组来保存元素的出现情况。由于数值是整形，有可能非常大，并且可能有负数，因此用数组下标索引实现的hash表没那么高效。由于题目是链表，因此我们直接使用STL里面的unorder_set就好(这里不用unordered_map的原因是我们只需要判断key在不在就可以了)</span></span><br><span class="line"><span class="comment">// 解法一：</span></span><br><span class="line"><span class="comment">// 时间复杂度： O(cN) c为hash表查找冲突次数</span></span><br><span class="line"><span class="comment">// 空间复杂度： O(C) C为hash的容量</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> Node &#123;</span><br><span class="line">	Node* next;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	Node(<span class="keyword">int</span> val) :value(val), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeDup</span><span class="params">(Node* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; uset;</span><br><span class="line">	uset.insert(head-&gt;value);</span><br><span class="line">	Node* p = head;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">	<span class="keyword">while</span> (p-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		it = uset.find(p-&gt;next-&gt;value);</span><br><span class="line">		<span class="keyword">if</span> (it == uset.end()) &#123;</span><br><span class="line">			uset.insert(p-&gt;next-&gt;value);</span><br><span class="line">			p = p-&gt;next; <span class="comment">// 这有bug 不能放到if的外面。因为如果执行了删除的话，是不能移位的</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			Node* tmp = p-&gt;next;</span><br><span class="line">			p-&gt;next = tmp-&gt;next;</span><br><span class="line">			<span class="keyword">delete</span> tmp;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向后遍历删除</span></span><br><span class="line"><span class="comment">// 解法2：</span></span><br><span class="line"><span class="comment">// 时间复杂度：O(N^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度：O(1)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeDup2</span><span class="params">(Node* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span> ||  head-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	Node* p = head;</span><br><span class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		Node* q = p;</span><br><span class="line">		<span class="keyword">while</span> (q-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (q-&gt;next-&gt;value == p-&gt;value) &#123;</span><br><span class="line">				Node* tmp = q-&gt;next;</span><br><span class="line">				q-&gt;next = tmp-&gt;next;</span><br><span class="line">				<span class="keyword">delete</span> tmp;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				q = q-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Node* head = <span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">	head-&gt;next = <span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">	head-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">	head-&gt;next-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line">	head-&gt;next-&gt;next-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">5</span>);</span><br><span class="line">	head-&gt;next-&gt;next-&gt;next-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line">	removeDup2(head);</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-2-Implement-an-algorithm-to-find-the-nth-to-last-element-of-a-singly-linked-list"><a href="#2-2-Implement-an-algorithm-to-find-the-nth-to-last-element-of-a-singly-linked-list" class="headerlink" title="2.2 Implement an algorithm to find the nth to last element of a singly linked list"></a><strong>2.2 Implement an algorithm to find the nth to last element of a singly linked list</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找链表倒数第K个节点</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> Node &#123;</span><br><span class="line">	Node* next;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	Node(<span class="keyword">int</span> val) :value(val), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 首先应该想到，通过第一次遍历得到链表的长度l，然后第二次遍历到l-n+1个节点就是所求</span></span><br><span class="line"><span class="comment">// 解法1：</span></span><br><span class="line"><span class="comment">// 时间复杂度:O(N)</span></span><br><span class="line"><span class="comment">// 空间复杂度：O(1)</span></span><br><span class="line"><span class="function">Node* <span class="title">findNthToLastElem</span><span class="params">(Node* head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span> || n == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">0</span>;</span><br><span class="line">	Node* p = head;</span><br><span class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		l++;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (l &lt; n) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">int</span> N = l - n + <span class="number">1</span>;</span><br><span class="line">	p = head;</span><br><span class="line">	<span class="keyword">while</span> (--N) &#123;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果只允许遍历一次链表，那么可以设置两个指针</span></span><br><span class="line"><span class="comment">// 第一个指针先走n步，然后两个指针一起走，当第一个指针为NULL时，第二个指针指向即为所求</span></span><br><span class="line"><span class="comment">// 解法2：</span></span><br><span class="line"><span class="comment">// 时间复杂度O(N)</span></span><br><span class="line"><span class="comment">// 空间复杂度O(1)</span></span><br><span class="line"><span class="function">Node* <span class="title">findNthToLastElem2</span><span class="params">(Node* head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span> || n == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	Node *p = head, *q = head;</span><br><span class="line">	<span class="keyword">while</span> (n--) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p != <span class="literal">NULL</span>) p = p-&gt;next;</span><br><span class="line">		<span class="comment">//这里需要特别注意if判断。因为如果l小于n的话，p走不了l步，程序会崩溃</span></span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">		q = q-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> q;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Node* head = <span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">	head-&gt;next = <span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">	head-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">	head-&gt;next-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line">	head-&gt;next-&gt;next-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">5</span>);</span><br><span class="line">	head-&gt;next-&gt;next-&gt;next-&gt;next-&gt;next = <span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">	Node* res = findNthToLastElem2(head, <span class="number">7</span>);</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-3-Implement-an-algorithm-to-delete-a-node-in-the-middle-of-a-single-linked-list-given-only-access-to-that-node"><a href="#2-3-Implement-an-algorithm-to-delete-a-node-in-the-middle-of-a-single-linked-list-given-only-access-to-that-node" class="headerlink" title="2.3 Implement an algorithm to delete a node in the middle of a single linked list, given only access to that node"></a><strong>2.3 Implement an algorithm to delete a node in the middle of a single linked list, given only access to that node</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只给中间结点，不给头结点实现结点的删除</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> Node &#123;</span><br><span class="line">	Node* next;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	Node(<span class="keyword">int</span> val) :value(val), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟删除</span></span><br><span class="line"><span class="comment">// 把下一个结点的值复制过来，然后删除下一个结点</span></span><br><span class="line"><span class="comment">// 这种模拟删除的方法不适用于结点是尾结点的情况，但是由于题目已经说明是中间结点，所以可以用这种方法</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteMiddleNode</span><span class="params">(Node* pdelete)</span> </span>&#123;</span><br><span class="line">    pdelete-&gt;value = pdelete-&gt;next-&gt;value;</span><br><span class="line">    pdelete-&gt;next = pdelete-&gt;next-&gt;next;</span><br><span class="line">    <span class="keyword">delete</span> pdelete-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/17/C1/" rel="next" title="Ctci 读书笔记（二）">
+                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（二）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/21/C3/" rel="prev" title="Ctci 读书笔记（四）">
+                Ctci 读书笔记（四） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/17/C2/"
+           data-title="Ctci 读书笔记（三）" data-url="http://yoursite.com/2016/05/17/C2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.JPG"
+               alt="Luting" />
+          <p class="site-author-name" itemprop="name">Luting</p>
+          <p class="site-description motion-element" itemprop="description">程序媛的日常</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-Linked-Lists"><span class="nav-number">1.</span> <span class="nav-text">Chapter 2 Linked Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现："><span class="nav-number">1.1.</span> <span class="nav-text">实现：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目："><span class="nav-number">1.2.</span> <span class="nav-text">题目：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Write-code-to-remove-duplicates-from-an-unsorted-linked-list-FOLLOW-UP-How-would-you-solve-this-problem-if-a-temporary-buffer-is-not-allowed"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 Write code to remove duplicates from an unsorted linked list. FOLLOW UP: How would you solve this problem if a temporary buffer is not allowed?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Implement-an-algorithm-to-find-the-nth-to-last-element-of-a-singly-linked-list"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Implement an algorithm to find the nth to last element of a singly linked list</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Implement-an-algorithm-to-delete-a-node-in-the-middle-of-a-single-linked-list-given-only-access-to-that-node"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 Implement an algorithm to delete a node in the middle of a single linked list, given only access to that node</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016.5 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luting</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luting"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
