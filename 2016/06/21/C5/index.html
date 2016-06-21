@@ -1,0 +1,662 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Chapter 5 Bit Manipulation位运算就是直接对整数在内存中的二进制位进行操作。由于程序中所有的数在计算机中都是以二进制的形式存储的，因此位运算特别快，而且代码比较简洁。
+位运算有6种：&amp;amp;（与），｜（或），～（反），^（异或），&amp;lt;&amp;lt; &amp;gt;&amp;gt; （左右移）
+举个位运算的例子：判断一个无符号整数是否为2的倍数
+123456789101112131415/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ctci 读书笔记（六）">
+<meta property="og:url" content="http://yoursite.com/2016/06/21/C5/index.html">
+<meta property="og:site_name" content="Luting's blog">
+<meta property="og:description" content="Chapter 5 Bit Manipulation位运算就是直接对整数在内存中的二进制位进行操作。由于程序中所有的数在计算机中都是以二进制的形式存储的，因此位运算特别快，而且代码比较简洁。
+位运算有6种：&amp;amp;（与），｜（或），～（反），^（异或），&amp;lt;&amp;lt; &amp;gt;&amp;gt; （左右移）
+举个位运算的例子：判断一个无符号整数是否为2的倍数
+123456789101112131415/">
+<meta property="og:updated_time" content="2016-06-21T15:17:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ctci 读书笔记（六）">
+<meta name="twitter:description" content="Chapter 5 Bit Manipulation位运算就是直接对整数在内存中的二进制位进行操作。由于程序中所有的数在计算机中都是以二进制的形式存储的，因此位运算特别快，而且代码比较简洁。
+位运算有6种：&amp;amp;（与），｜（或），～（反），^（异或），&amp;lt;&amp;lt; &amp;gt;&amp;gt; （左右移）
+举个位运算的例子：判断一个无符号整数是否为2的倍数
+123456789101112131415/">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Ctci 读书笔记（六） | Luting's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luting's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-technology">
+          <a href="/technology" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-thumbs-up"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ctci 读书笔记（六）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-21T23:13:21+08:00" content="2016-06-21">
+              2016-06-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/21/C5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/21/C5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter-5-Bit-Manipulation"><a href="#Chapter-5-Bit-Manipulation" class="headerlink" title="Chapter 5 Bit Manipulation"></a>Chapter 5 Bit Manipulation</h2><p>位运算就是直接对整数在内存中的二进制位进行操作。由于程序中所有的数在计算机中都是以二进制的形式存储的，因此位运算特别快，而且代码比较简洁。</p>
+<p>位运算有6种：&amp;（与），｜（或），～（反），^（异或），&lt;&lt; &gt;&gt; （左右移）</p>
+<p>举个位运算的例子：判断一个无符号整数是否为2的倍数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果一个数是2的倍数，那么一直用2去除会得到1</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span>(num%<span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        num = num/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num == <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同样的，用位运算也可以做到。</span></span><br><span class="line"><span class="comment">// 2倍数的无符号整数有个显著的特点，即只有一位是1。</span></span><br><span class="line"><span class="comment">// 因此如果是2的倍数，那么x&amp;(x-1)一定是0</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo2</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num &amp;&amp; !(num &amp; (num<span class="number">-1</span>)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拓展：得到一个无符号整数二进制形式中1的个数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通做法是通过遍历每一位判断是否为1</span></span><br><span class="line"><span class="comment">// 进阶做法是通过消除每一个1直到为0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numOfOne</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(num) &#123;</span><br><span class="line">        num = num &amp; (num<span class="number">-1</span>);</span><br><span class="line">        count ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>进阶：给定一个集合，打印出这个集合的所有可能子集<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个有N个元素的集合，总共的子集数量为2^N</span></span><br><span class="line"><span class="comment">// 因此将每个元素与位一一对应起来，可以通过对应的位有没有置1来判断该元素是否在某个子集中。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printSubsets</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; N); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j)) &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; a[j] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="5-1-You-are-given-two-32-bit-numbers-N-and-M-and-two-bit-positions-i-and-j-Write-a-method-to-set-all-bits-between-i-and-j-in-N-equal-to-M-e-g-M-becomes-a-substring-of-N-located-at-i-and-starting-at-j"><a href="#5-1-You-are-given-two-32-bit-numbers-N-and-M-and-two-bit-positions-i-and-j-Write-a-method-to-set-all-bits-between-i-and-j-in-N-equal-to-M-e-g-M-becomes-a-substring-of-N-located-at-i-and-starting-at-j" class="headerlink" title="5.1 You are given two 32-bit numbers, N and M, and two bit positions, i and j Write a method to set all bits between i and j in N equal to M (e g , M becomes a substring of N located at i and starting at j)"></a><strong>5.1 You are given two 32-bit numbers, N and M, and two bit positions, i and j Write a method to set all bits between i and j in N equal to M (e g , M becomes a substring of N located at i and starting at j)</strong></h4><p>EXAMPLE:<br>Input: N = 10000000000, M = 10101, i = 2, j = 6<br>Output: N = 10001010100</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法1: 将n中的i到j位清零，然后与左移i位的m做或运算</span></span><br><span class="line"><span class="comment">// 因此关键就是生成一个从i到j位为0，其他位全为1的掩码</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setBits</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> max = ~<span class="number">0</span>; <span class="comment">//set all bits to 1;</span></span><br><span class="line">    <span class="keyword">int</span> right = (<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>; <span class="comment">// set the left of the ith bit to 0(including the ith bit) and the right of the ith bit to 1</span></span><br><span class="line">    <span class="keyword">int</span> left = max - (<span class="number">1</span> &lt;&lt; (j+<span class="number">1</span>) <span class="number">-1</span>); <span class="comment">// set the left of the jth bit to 1(not include the j) and the right of the jth bit to 0(includeing the jth bit)</span></span><br><span class="line">    <span class="keyword">int</span> mask = left | right;</span><br><span class="line">    n = ((n &amp; mask) | (m &lt;&lt; i));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2: 先将n中i位之前的bits保存下来位，然后将j位之前的bits清零，与左移i位的m做或运算，然后再与保留的位做或运算恢复i之前的bits</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setBits2</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = n &amp; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>);</span><br><span class="line">    n = n &gt;&gt; (j+<span class="number">1</span>);</span><br><span class="line">    n = n &lt;&lt; (j+<span class="number">1</span>);</span><br><span class="line">    n = (n | (m &lt;&lt; i) | ret);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">1</span> &lt;&lt; <span class="number">11</span> ;</span><br><span class="line">    <span class="keyword">int</span> m = <span class="number">21</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">4</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Original n is: "</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Original m is: "</span> &lt;&lt; m &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    setBits(n, m, i, j);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Converted n is: "</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-Given-a-decimal-eg-3-72-number-that-is-passed-in-as-a-string-print-the-binary-representation-If-the-number-can-not-be-represented-accurately-in-binary-print-“ERROR”"><a href="#5-2-Given-a-decimal-eg-3-72-number-that-is-passed-in-as-a-string-print-the-binary-representation-If-the-number-can-not-be-represented-accurately-in-binary-print-“ERROR”" class="headerlink" title="5.2 Given a (decimal - eg 3.72) number that is passed in as a string, print the binary representation If the number can not be represented accurately in binary, print “ERROR”"></a><strong>5.2 Given a (decimal - eg 3.72) number that is passed in as a string, print the binary representation If the number can not be represented accurately in binary, print “ERROR”</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 给定一个以字符串形式表示的小数，</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printStrToBinary</span><span class="params">(<span class="built_in">string</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 将小数表示为二进制，分为整数部分和小数部分</span></span><br><span class="line">    <span class="comment">// 对于整数部分，则通过对2取余除2倒序排列，或者通过按位与1与运算然后除2（移位）</span></span><br><span class="line">    <span class="comment">// 对于小数部分，则通过与2乘与1比较得到1或0之后顺序排列（如果大于等于1，则相应的二进制位为1，并减去1，如果小于1，则响应的二进制位为0）</span></span><br><span class="line">    <span class="comment">// 如果小数部分的二进制位数超过一个阈值（例如32位），则认为无法精确表示为二进制，输出“error”</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> pos = num.find(<span class="string">'.'</span>);</span><br><span class="line">    <span class="keyword">int</span> interger = atoi(num.substr(<span class="number">0</span>, pos).c_str());</span><br><span class="line">    <span class="keyword">double</span> decimal = atof(num.substr(pos).c_str());</span><br><span class="line">    <span class="built_in">string</span> intStr = <span class="string">""</span>;</span><br><span class="line">    <span class="built_in">string</span> deciStr = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">while</span>(interger &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(interger &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            intStr = <span class="string">"1"</span> + intStr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            intStr = <span class="string">"0"</span> + intStr;</span><br><span class="line">        interger &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span>(decimal &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(deciStr.length() &gt; <span class="number">32</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"ERROR"</span>;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        decimal *= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(decimal &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            deciStr += <span class="string">"1"</span>;</span><br><span class="line">            decimal -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            deciStr += <span class="string">"0"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag == <span class="literal">false</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">string</span> res = intStr + <span class="string">"."</span> + deciStr;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-3-Given-an-integer-print-the-next-smallest-and-next-largest-number-that-have-the-same-number-of-1-bits-in-their-binary-representation"><a href="#5-3-Given-an-integer-print-the-next-smallest-and-next-largest-number-that-have-the-same-number-of-1-bits-in-their-binary-representation" class="headerlink" title="5.3 Given an integer, print the next smallest and next largest number that have the same number of 1 bits in their binary representation"></a><strong>5.3 Given an integer, print the next smallest and next largest number that have the same number of 1 bits in their binary representation</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 暴力解法是数出当前二进制表示中1的个数，然后增加1，直到找到二进制中1的个数相当的数，减一类似</span></span><br><span class="line"><span class="comment">// 仔细想想二进制的特点，从左往右找到第一个1，然后找到第一个0，将0改为1，并且把左边的数改为0，然后将其余的1移到最左边，即位下一个数</span></span><br><span class="line"><span class="comment">// 同理上一个数逻辑相反</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">getBits</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((num &amp; (<span class="number">1</span> &lt;&lt; index)) &gt; <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setBits</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> index, <span class="keyword">bool</span> flag)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res;</span><br><span class="line">    <span class="keyword">if</span>(flag == <span class="literal">true</span>) &#123; <span class="comment">//set to 1</span></span><br><span class="line">        res = (num | (<span class="number">1</span> &lt;&lt; index));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">//set to 0</span></span><br><span class="line">        res = (num &amp; (~(<span class="number">1</span> &lt;&lt; index)));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//suppose the integer is positive</span></span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!getBits(num, index)) &#123; <span class="comment">//find the first 1</span></span><br><span class="line">        index++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> oneCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(getBits(num, index)) &#123; <span class="comment">//find the next first 0</span></span><br><span class="line">        index++;</span><br><span class="line">        oneCount++;</span><br><span class="line">    &#125;</span><br><span class="line">    num = setBits(num, index, <span class="literal">true</span>); <span class="comment">//turn on 0</span></span><br><span class="line">    num = setBits(num, --index, <span class="literal">false</span>); <span class="comment">//turn off 1 beside</span></span><br><span class="line">    oneCount--;</span><br><span class="line">    index--;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &gt;= oneCount; i--) &#123;</span><br><span class="line">        num = setBits(num, i, <span class="literal">false</span>); <span class="comment">//set zero</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = oneCount<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        num = setBits(num, i, <span class="literal">true</span>); <span class="comment">//set one</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">previous</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//suppose the integer is positive</span></span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(getBits(num, index)) &#123; <span class="comment">//find the first 0</span></span><br><span class="line">        index++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> zeroCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!getBits(num, index)) &#123; <span class="comment">//find the next first 1</span></span><br><span class="line">        index++;</span><br><span class="line">        zeroCount++;</span><br><span class="line">    &#125;</span><br><span class="line">    num = setBits(num, index, <span class="literal">false</span>); <span class="comment">//turn off 1</span></span><br><span class="line">    num = setBits(num, --index, <span class="literal">true</span>); <span class="comment">//turn on 0 beside</span></span><br><span class="line">    zeroCount--;</span><br><span class="line">    index--;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &gt;= zeroCount; i--) &#123;</span><br><span class="line">        num = setBits(num, i, <span class="literal">true</span>); <span class="comment">//set one</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = zeroCount<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        num = setBits(num, i, <span class="literal">false</span>); <span class="comment">//set zero</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/27/C4/" rel="next" title="Ctci 读书笔记（五）">
+                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（五）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/21/C5/"
+           data-title="Ctci 读书笔记（六）" data-url="http://yoursite.com/2016/06/21/C5/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.JPG"
+               alt="Luting" />
+          <p class="site-author-name" itemprop="name">Luting</p>
+          <p class="site-description motion-element" itemprop="description">程序媛的日常</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-Bit-Manipulation"><span class="nav-number">1.</span> <span class="nav-text">Chapter 5 Bit Manipulation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-You-are-given-two-32-bit-numbers-N-and-M-and-two-bit-positions-i-and-j-Write-a-method-to-set-all-bits-between-i-and-j-in-N-equal-to-M-e-g-M-becomes-a-substring-of-N-located-at-i-and-starting-at-j"><span class="nav-number">1.1.1.</span> <span class="nav-text">5.1 You are given two 32-bit numbers, N and M, and two bit positions, i and j Write a method to set all bits between i and j in N equal to M (e g , M becomes a substring of N located at i and starting at j)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-Given-a-decimal-eg-3-72-number-that-is-passed-in-as-a-string-print-the-binary-representation-If-the-number-can-not-be-represented-accurately-in-binary-print-“ERROR”"><span class="nav-number">1.1.2.</span> <span class="nav-text">5.2 Given a (decimal - eg 3.72) number that is passed in as a string, print the binary representation If the number can not be represented accurately in binary, print “ERROR”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-Given-an-integer-print-the-next-smallest-and-next-largest-number-that-have-the-same-number-of-1-bits-in-their-binary-representation"><span class="nav-number">1.1.3.</span> <span class="nav-text">5.3 Given an integer, print the next smallest and next largest number that have the same number of 1 bits in their binary representation</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016.5 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luting</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luting"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
