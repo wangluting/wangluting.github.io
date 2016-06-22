@@ -253,6 +253,143 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/17/C2/" itemprop="url">
+                  Ctci 读书笔记（三）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T23:33:11+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/C2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/C2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-2-Linked-Lists"><a href="#Chapter-2-Linked-Lists" class="headerlink" title="Chapter 2 Linked Lists"></a>Chapter 2 Linked Lists</h2><h3 id="实现："><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3><p>链表操作在面试中很常见。链表和数组最大的区别是插入和删除节点的时间复杂度是O(1)，而查找的时间复杂度是O(N)。面试者必须掌握如何创建一个链表，插入，删除一个节点。<br>C++ STL中list实现了双向链表的功能。以下是例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Constructor</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l1; <span class="comment">//empty list</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l2(<span class="number">4</span>, <span class="number">1</span>); <span class="comment">// 4 ints with value 1</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l3(l2.begin(), l2.end()); <span class="comment">//iterating through l2</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l4&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;; <span class="comment">// 3 ints with values 1,2,3</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Iterator</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">    <span class="keyword">for</span>(it = l4.begin(); it != l4.end(); it++) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Add and delete last element </span></span><br><span class="line">    l4.push_back(<span class="number">4</span>);</span><br><span class="line">    l4.push_back(<span class="number">5</span>);</span><br><span class="line">    l4.pop_back();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Add and delete first element</span></span><br><span class="line">    l4.push_front(<span class="number">0</span>);</span><br><span class="line">    l4.push_front(<span class="number">-1</span>);</span><br><span class="line">    l4.pop_front();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Access first and last element</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"First element of l4 is: "</span> &lt;&lt; l4.front &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Last element of l4 is: "</span> &lt;&lt; <span class="number">14.</span>back() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Assign new content </span></span><br><span class="line">    l1 = l4;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Size of l1: "</span> &lt;&lt; l1.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">    l4.assign(l2.begin(), l2.end());</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Size of l4: "</span> &lt;&lt; l4.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Insert and erase element at any position</span></span><br><span class="line">    l4.insert(l4.begin()+<span class="number">3</span>, <span class="number">10</span>);</span><br><span class="line">    l4.erase(l4.end()<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>复杂的链表操作并不常见，而且我们需要链表的时候一般是自己实现一个链表：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Node &#123;</span><br><span class="line">    Node* next;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    Node(<span class="keyword">int</span> val):value(val), next(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//往链表的末尾添加新结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addToTail</span><span class="params">(Node* &amp;head, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">// 这里要注意，head是一个引用指针类型。因为如果链表为空，那么我们往里面插入一个节点，就会改变头指针。因此必须把head设置为可以改变指针值的指针，否则出了这个函数head仍然是一个空指针</span></span><br><span class="line">    Node* newNode = <span class="keyword">new</span> Node(val);</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        head = newNode; <span class="comment">// 容易忽略往空链表插入节点的情况</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node* p = head;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>) p = p-&gt;next;</span><br><span class="line">        p-&gt;next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个指定值的结点</span></span><br><span class="line"><span class="comment">// 分别考虑删除的是头结点，中间结点和尾结点的情况</span></span><br><span class="line"><span class="comment">// 同时要考虑到链表不含指定值的情况,以及空链表的情况</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteOfTail</span><span class="params">(Node* &amp;head, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//同理，头指针也要设置为引用类型，因为有可能被改变</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    Node* pdelete = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(head-&gt;value == val) &#123; <span class="comment">//删除的是头结点</span></span><br><span class="line">        pdelete = head;</span><br><span class="line">        head = head-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node* p = head;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; p-&gt;next-&gt;value != val) &#123; <span class="comment">//循环跳出有两种条件：一是走到了末尾仍没有找到指定值，二是找到了指定值；尾结点和中间节点可以合并</span></span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; p-&gt;next-&gt;value == val) &#123;</span><br><span class="line">            pdelete = p-&gt;next;</span><br><span class="line">            p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pdelete!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> pdelete;</span><br><span class="line">        pdelete = <span class="literal">NULL</span>; <span class="comment">//set pointer to NULL after deletion</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/17/C2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/17/C1/" itemprop="url">
                   Ctci 读书笔记（二）
                 </a>
@@ -470,8 +607,7 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>好记性不如烂笔头。<br>今天开始读Cracking the coding interview。<br>希望能在8月份去美国之前把这本书读完一遍。</p>
 </blockquote>
 <h2 id="面试前"><a href="#面试前" class="headerlink" title="面试前"></a>面试前</h2><ul>
@@ -511,142 +647,11 @@
 <h3 id="简历建议："><a href="#简历建议：" class="headerlink" title="简历建议："></a>简历建议：</h3><blockquote>
 <p>面试官期待从简历中看到的两点:<br>1 你是否够聪明<br>2 你是否会写代码</p>
 </blockquote>
-<p>一些无关的信息，比如说个人爱好不要出现在简历上。简历上只保留最打动人的，最相关的项目经验。不相关的信息会毁了你的简历并且分散面试官的耐心。 试着这样写： </p>
-<ul>
-<li><strong>Accomplished X by implementing Y which led to Z</strong></li>
-<li>show what you did, how you did it, what the result were. Try to make the results “measurable” somehow.</li>
-<li>在简历中列出2-4个最重要的projects. <strong>State what the project was, which language or technologies it employed, and whether it was an individual project or a team project</strong>. 非课程的项目会更加preferable.</li>
-<li>简历上如果要列出会用的软件或工具，不要写MS之类的技能，可以列出VS, Eclipse, Linux</li>
-<li>对于编程语言，列出常用的几种语言并且标注上能力级别。例如：Java(expert), C++(proficient), JaveScript(prior experience)</li>
-<li>对于Non-Native applicant, 不要在简历中出现typo</li>
-</ul>
-<h3 id="技术之外的准备："><a href="#技术之外的准备：" class="headerlink" title="技术之外的准备："></a>技术之外的准备：</h3><p>面试中，面试官为了了解面试者的性格，或是缓和紧张气氛，会问一些behavioral questions.<br>例如：tell me about a time when…<br>建议面试者在面试前列出这样一张表:<br><img src="/img/table1.bmp" alt=""></p>
-<p>有了这张表，在面试中被问起简历里相关的项目后，就会come up with an appropriate story effortlessly.  </p>
-<ul>
-<li>当被问起weakness时，请给出一个<strong>真正</strong>的缺点，并且说明你是如何克服的</li>
-<li>你并不是在简单的回答面试官的每一个问题，而是在<strong>telling yourself</strong>.仔细想一想每一个回答如何展示出真正的自己</li>
-</ul>
-<h3 id="适合问面试官的问题："><a href="#适合问面试官的问题：" class="headerlink" title="适合问面试官的问题："></a>适合问面试官的问题：</h3><p>在面试结束后，一般都会留给面试者向面试官提问的机会，提问的质量有可能会成为影响他们是否给你发offer的因素。问题一般可以分为3类：<br>1.Genuine questions：<br>这一般是面试者真正想知道的</p>
-<blockquote>
-<ol>
-<li>How much of your day do you spend coding?</li>
-<li>How many meetings do you have every week?</li>
-</ol>
-</blockquote>
-<p>2.Insightful questions:<br>这类问题一般能表明面试者deep knowledge of programming or technologies</p>
-<blockquote>
-<ol>
-<li>I noticed that you are using technology X. How do you handle problem Y?  </li>
-<li>Why did the product choose to use the X protocol over the Y protocol? I know it has benefits like A, B, C, but many companies choose not to use it because of issue D.</li>
-</ol>
-</blockquote>
-<p>3.Passion questions:<br>这类问题能表现面试者passion for technology</p>
-<blockquote>
-<ol>
-<li>I am very interested in scalability. Did you come in with a background in this, or what opportunities are there to learn about it?</li>
-<li>I’m not very famaliar with technology X, but it sounds like a very interesting solution. Could you tell me a bit more about how it works.</li>
-</ol>
-</blockquote>
-<h3 id="技术方面的准备："><a href="#技术方面的准备：" class="headerlink" title="技术方面的准备："></a>技术方面的准备：</h3><p>该如何准备技术问题，以下是几点建议：</p>
-<ul>
-<li>自己解决问题， <strong><em>I mean, really try to solve it</em></strong>. 有一些问题被设计出来就是很难的，<strong><em>that’s Ok</em></strong>. 在解决问题时仔细想想时间和空间复杂度，问问自己能否牺牲空间来换取时间，或者反之</li>
-<li>在纸上写代码，前面已经提到过了</li>
-<li>将纸上的代码敲进电脑，记下来手写代码中那些错误的地方，<strong><em>keep in mind and make sure it won’t happen in interview</em></strong></li>
-<li>模拟面试</li>
-</ul>
-<p>一般来说，特别复杂的算法都不会出现在面试中，因为面试官也不记得这些算法的细节。<br>对于面试者必须掌握的知识：</p>
-<table>
-<thead>
-<tr>
-<th>Data Structure</th>
-<th>Algorithm</th>
-<th>Concepts</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Linked List</td>
-<td>Breadth First Search</td>
-<td>Bit manipulation</td>
-</tr>
-<tr>
-<td>Binary Tree</td>
-<td>Depth First Search</td>
-<td>Sinngleton Design Pattern</td>
-</tr>
-<tr>
-<td>Tries</td>
-<td>Binary Search</td>
-<td>Factory Design Pattern</td>
-</tr>
-<tr>
-<td>Stacks</td>
-<td>Merge Sort</td>
-<td>Memory(Stack vs Heap)</td>
-</tr>
-<tr>
-<td>Queues</td>
-<td>Quick Sort</td>
-<td>Recursion</td>
-</tr>
-<tr>
-<td>Vectors/ArrayLists</td>
-<td>Tree Insert/Find/etc</td>
-<td>Big O problem</td>
-</tr>
-<tr>
-<td>Hash Tables</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>对于上面表格列出的这些要点，需要知道如何实现它们和使用，并且知道时间和空间复杂度。</p>
-<p>前面都是面试之前的准备，记下来讲讲面试中如何表现</p>
-<h2 id="面试中"><a href="#面试中" class="headerlink" title="面试中"></a>面试中</h2><p>刚开始的时候，面试官通常会问一些behavioral questions. 对于这类问题的回答，有以下几点建议：</p>
-<ul>
-<li>be specific, not arrogant. Specificity 意味着客观陈述事实并由面试官来判断.</li>
-<li>limit details. 试着只陈述key points. 最后向面试官表明：I can go into more details if you’d like.</li>
-<li>ask good questions，前面已经总结了应该问面试官哪些问题</li>
-<li>structure answers using S.A.R. Situation, Action, Response.回答问题的时候，首先表明situation，然后解释采取了什么action,最后描述results。</li>
-</ul>
-<p>当进入到真正的面试，面试官开始问technical questions</p>
-<p><strong>Five steps to a technical questions</strong>:</p>
-<ol>
-<li>就题目不清晰的地方向面试官提问</li>
-<li>设计算法</li>
-<li>写伪码，并且告诉面试官你先写伪码，否则面试官可能认为你不会写代码</li>
-<li>真正写代码，不要写太快，也不要写太慢</li>
-<li>检查代码是否有出错的地方</li>
-</ol>
-<p>向面试官提问：</p>
-<blockquote>
-<p>What are the data types?<br>How much date is there?<br>What assumption do you need to solve the problem<br>Who is the user?</p>
-</blockquote>
-<p>设计算法：<br>考虑以下5点：</p>
-<ol>
-<li>space complexity and time complexity</li>
-<li>what happens if there is much data</li>
-<li>Does the design cause other issue?</li>
-<li>If there is other issue, did you make the right trade-off</li>
-<li>If they gave you specific data, have you leveraged that information?</li>
-</ol>
-<h2 id="面试后"><a href="#面试后" class="headerlink" title="面试后"></a>面试后</h2><p>拿到了offer后，根据自己的职业规划，以及比较各个公司的package选择心仪的offer</p>
-<h2 id="十个面试者容易犯的错误"><a href="#十个面试者容易犯的错误" class="headerlink" title="十个面试者容易犯的错误"></a>十个面试者容易犯的错误</h2><ul>
-<li>在电脑上练习写代码</li>
-<li>不准备技术外的问题</li>
-<li>不做模拟面试</li>
-<li>尝试背答案</li>
-<li>说的太多</li>
-<li>说的太少</li>
-<li>写代码太急</li>
-<li>不检查代码</li>
-<li>代码风格不佳</li>
-<li>容易放弃</li>
-</ul>
-<p>以上为面试的准备，接下来将进入到具体的面试问题。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/14/ctci1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -819,7 +824,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

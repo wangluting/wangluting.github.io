@@ -1,0 +1,657 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Chapter 6 Brain Teasers在面试中可能会被问到一些脑筋急转弯的问题（尽管一些公司规定在面试过程中禁止问这类的题目）。遇到这类问题的时候不要慌，因为有些时候面试官只是想看你对待这类智力题的反应，他们并不要求面试者能立马想出完美的答案来。这时候要多跟面试官交流，让他们直到你是怎么思考的，而不是想不出答案也不说话。
+实际上，这类的问题通常都与计算机知识相关（特别注意题目出现的数字，比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ctci 读书笔记（七）">
+<meta property="og:url" content="http://yoursite.com/2016/06/22/C6/index.html">
+<meta property="og:site_name" content="Luting's blog">
+<meta property="og:description" content="Chapter 6 Brain Teasers在面试中可能会被问到一些脑筋急转弯的问题（尽管一些公司规定在面试过程中禁止问这类的题目）。遇到这类问题的时候不要慌，因为有些时候面试官只是想看你对待这类智力题的反应，他们并不要求面试者能立马想出完美的答案来。这时候要多跟面试官交流，让他们直到你是怎么思考的，而不是想不出答案也不说话。
+实际上，这类的问题通常都与计算机知识相关（特别注意题目出现的数字，比">
+<meta property="og:updated_time" content="2016-06-22T14:31:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ctci 读书笔记（七）">
+<meta name="twitter:description" content="Chapter 6 Brain Teasers在面试中可能会被问到一些脑筋急转弯的问题（尽管一些公司规定在面试过程中禁止问这类的题目）。遇到这类问题的时候不要慌，因为有些时候面试官只是想看你对待这类智力题的反应，他们并不要求面试者能立马想出完美的答案来。这时候要多跟面试官交流，让他们直到你是怎么思考的，而不是想不出答案也不说话。
+实际上，这类的问题通常都与计算机知识相关（特别注意题目出现的数字，比">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Ctci 读书笔记（七） | Luting's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luting's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-technology">
+          <a href="/technology" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-thumbs-up"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ctci 读书笔记（七）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-22T22:25:19+08:00" content="2016-06-22">
+              2016-06-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/22/C6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/22/C6/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter-6-Brain-Teasers"><a href="#Chapter-6-Brain-Teasers" class="headerlink" title="Chapter 6 Brain Teasers"></a>Chapter 6 Brain Teasers</h2><p>在面试中可能会被问到一些脑筋急转弯的问题（尽管一些公司规定在面试过程中禁止问这类的题目）。遇到这类问题的时候不要慌，因为有些时候面试官只是想看你对待这类智力题的反应，他们并不要求面试者能立马想出完美的答案来。这时候要多跟面试官交流，让他们直到你是怎么思考的，而不是想不出答案也不说话。</p>
+<p>实际上，这类的问题通常都与计算机知识相关（特别注意题目出现的数字，比如说1000，就要想到1024，2的10次方之类的）。好的建议是将问题简化，看看能不能解决一个子问题或者想出在某个特例下的解法，然后再尝试将问题扩大到更普遍的解法。</p>
+<p>举个例子，你现在需要准确的15分钟来煎鸡蛋，但是你没有钟表。你唯一有的是两条绳子。这两条绳子有个特点，那就是将任意一根绳子点燃直到燃尽所花的时间是准确的一个小时（60分钟）。绳子是不均匀的，即将绳子剪成两半点燃其中的一半所花的时间不是准确的30分钟。请问你该怎么计时来煎鸡蛋？</p>
+<p>这道题看起来不可解，但是通过将问题简化就可以想出解法。</p>
+<blockquote>
+<p>现在可以精确的计算60分钟（通过燃烧一条绳子）<br>如何精确计算30分钟呢？ 即如何让绳子的燃烧速度变为之前的两倍？<br>对，从一条绳子的两端同时点燃<br>那怎么精确计算15分钟呢？<br>这样想，如果我们有一条燃尽需要30分钟的绳子，那么通过两端同时点燃就可以精确计算15分钟了<br>那如何可以得到一条燃尽需要30分钟的绳子呢？<br>对，让两个绳子同时点燃，不同的是，一条绳子从一头燃烧，另一条绳子从两段同时燃烧。当一条绳子<br>燃尽的时候，我们就直到已经过去了30分钟了，即另一条绳子燃尽还需30分钟，此时再把另一条绳子的<br>另一头点燃，即剩下的绳子在15分钟会燃尽，此时开始煎鸡蛋就可以了。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="6-1-Add-arithmetic-operators-plus-minus-times-divide-to-make-the-following-expres-sion-true-3-1-3-6-8-You-can-use-any-parentheses-you’d-like"><a href="#6-1-Add-arithmetic-operators-plus-minus-times-divide-to-make-the-following-expres-sion-true-3-1-3-6-8-You-can-use-any-parentheses-you’d-like" class="headerlink" title="6.1 Add arithmetic operators (plus, minus, times, divide) to make the following expres- sion true: 3 1 3 6 = 8 You can use any parentheses you’d like"></a><strong>6.1 Add arithmetic operators (plus, minus, times, divide) to make the following expres- sion true: 3 1 3 6 = 8 You can use any parentheses you’d like</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">想一想怎样能得到8呢</span><br><span class="line">2*4=8</span><br><span class="line">16/2=8</span><br><span class="line">4+4=8</span><br><span class="line"></span><br><span class="line">考虑第一种情况，如何能得到2和4</span><br><span class="line">显然，3+1=4</span><br><span class="line">如何得到2呢？</span><br><span class="line">6/3=2，但是题目是先3后6，并且3/6=0.5</span><br><span class="line">4/0.5=8</span><br><span class="line">即(3+1)/(3/6)=8</span><br></pre></td></tr></table></figure>
+<h4 id="6-2-There-is-an-8x8-chess-board-in-which-two-diagonally-opposite-corners-have-been-cut-o-You-are-given-31-dominos-and-a-single-domino-can-cover-exactly-two-squares-Can-you-use-the-31-dominos-to-cover-the-entire-board-Prove-your-answer-by-provid-ing-an-example-or-showing-why-it’s-impossible"><a href="#6-2-There-is-an-8x8-chess-board-in-which-two-diagonally-opposite-corners-have-been-cut-o-You-are-given-31-dominos-and-a-single-domino-can-cover-exactly-two-squares-Can-you-use-the-31-dominos-to-cover-the-entire-board-Prove-your-answer-by-provid-ing-an-example-or-showing-why-it’s-impossible" class="headerlink" title="6.2 There is an 8x8 chess board in which two diagonally opposite corners have been cut o  You are given 31 dominos, and a single domino can cover exactly two squares Can you use the 31 dominos to cover the entire board? Prove your answer (by provid- ing an example, or showing why it’s impossible)"></a><strong>6.2 There is an 8x8 chess board in which two diagonally opposite corners have been cut o  You are given 31 dominos, and a single domino can cover exactly two squares Can you use the 31 dominos to cover the entire board? Prove your answer (by provid- ing an example, or showing why it’s impossible)</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这道题是一道经典题目，答案是不可能的</span><br><span class="line">详情见：</span><br><span class="line">https://en.wikipedia.org/wiki/Mutilated_chessboard_problem</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-You-have-a-ve-quart-jug-and-a-three-quart-jug-and-an-unlimited-supply-of-water-but-no-measuring-cups-How-would-you-come-up-with-exactly-four-quarts-of-water"><a href="#6-3-You-have-a-ve-quart-jug-and-a-three-quart-jug-and-an-unlimited-supply-of-water-but-no-measuring-cups-How-would-you-come-up-with-exactly-four-quarts-of-water" class="headerlink" title="6.3 You have a  ve quart jug and a three quart jug, and an unlimited supply of water (but no measuring cups) How would you come up with exactly four quarts of water?"></a><strong>6.3 You have a  ve quart jug and a three quart jug, and an unlimited supply of water (but no measuring cups) How would you come up with exactly four quarts of water?</strong></h4><p>NOTE: The jugs are oddly shaped, such that  lling up exactly ‘half’ of the jug would be impossible<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">先将5升水桶倒满</span><br><span class="line">将5升水桶中的水往3升水桶中倒，还剩2升</span><br><span class="line">将3升水桶的水倒出，将5升水桶中的2升水倒入</span><br><span class="line">将5升水桶倒满</span><br><span class="line">将5升水桶的水往3升水桶倒，由于3升水桶中有2升水，因此只能倒1升</span><br><span class="line">因此5升水桶中最后剩4升水</span><br><span class="line">实际上，如果两个水桶的体积是x和y，x和y都为质数，我们可以得到任意容量的水（1到(x＋y))，对于这道题就是我们可以得到1到8升水</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/21/C5/" rel="next" title="Ctci 读书笔记（六）">
+                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（六）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/22/C6/"
+           data-title="Ctci 读书笔记（七）" data-url="http://yoursite.com/2016/06/22/C6/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.JPG"
+               alt="Luting" />
+          <p class="site-author-name" itemprop="name">Luting</p>
+          <p class="site-description motion-element" itemprop="description">程序媛的日常</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-6-Brain-Teasers"><span class="nav-number">1.</span> <span class="nav-text">Chapter 6 Brain Teasers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-Add-arithmetic-operators-plus-minus-times-divide-to-make-the-following-expres-sion-true-3-1-3-6-8-You-can-use-any-parentheses-you’d-like"><span class="nav-number">1.1.1.</span> <span class="nav-text">6.1 Add arithmetic operators (plus, minus, times, divide) to make the following expres- sion true: 3 1 3 6 = 8 You can use any parentheses you’d like</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-There-is-an-8x8-chess-board-in-which-two-diagonally-opposite-corners-have-been-cut-o-You-are-given-31-dominos-and-a-single-domino-can-cover-exactly-two-squares-Can-you-use-the-31-dominos-to-cover-the-entire-board-Prove-your-answer-by-provid-ing-an-example-or-showing-why-it’s-impossible"><span class="nav-number">1.1.2.</span> <span class="nav-text">6.2 There is an 8x8 chess board in which two diagonally opposite corners have been cut o  You are given 31 dominos, and a single domino can cover exactly two squares Can you use the 31 dominos to cover the entire board? Prove your answer (by provid- ing an example, or showing why it’s impossible)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-You-have-a-ve-quart-jug-and-a-three-quart-jug-and-an-unlimited-supply-of-water-but-no-measuring-cups-How-would-you-come-up-with-exactly-four-quarts-of-water"><span class="nav-number">1.1.3.</span> <span class="nav-text">6.3 You have a  ve quart jug and a three quart jug, and an unlimited supply of water (but no measuring cups) How would you come up with exactly four quarts of water?</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016.5 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luting</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luting"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
