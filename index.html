@@ -253,6 +253,154 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/28/C8/" itemprop="url">
+                  Ctci 读书笔记（九）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-28T23:55:41+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/28/C8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/28/C8/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-8-Recursion"><a href="#Chapter-8-Recursion" class="headerlink" title="Chapter 8 Recursion"></a>Chapter 8 Recursion</h2><p>面试中会遇到许多可以用递归解决的问题，这类问题都有一些共同点：那就是它们都可以拆解成小的问题，即解决这个问题可以通过解决它的子问题来解决。可以用递归解决的问题通常（但不总是）有规律可循，例如：设计一个算法去解决<strong>第n个</strong>；写代码列出<strong>前n个</strong>；实现一个方法去计算<strong>所有的</strong>。</p>
+<p>遇到这类问题，通常可以通过以下的步骤去分析：</p>
+<ol>
+<li>想一想子问题是什么？有多少个子问题</li>
+<li>解决base case. 如果需要f(n),那么base case就是f(0)或f(1). 它的值一般是hard-code，可以从题目推出</li>
+<li>由base case继续解决f(2),f(3)</li>
+<li>仔细思考f(3)是如何从f(2)得到的，即弄明白由子问题如何推得大问题的解</li>
+<li>得到f(n)这个通用的解<br>自底向上的解法通常十分直接。有的时候自顶向下的方法也可行。</li>
+</ol>
+<p>在解决递归问题的时候，有两点需要注意的：</p>
+<ol>
+<li>所有用递归解决的问题都可以用迭代来解决（虽然用迭代的解法可能会使得代码更加复杂）。在用递归解决问题之前，问问自己如果用迭代来解决会有多复杂。可以和你的面试官讨论trade-off.</li>
+<li>递归的解法比较浪费空间，你可以想想每一次调用都往栈里面加了一层，意味着如果你的代码时间复杂度为o(n)，那么空间复杂度也至少为o(n).这也是为什么迭代的解法更好。</li>
+</ol>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="8-1-Write-a-method-to-generate-the-nth-Fibonacci-number"><a href="#8-1-Write-a-method-to-generate-the-nth-Fibonacci-number" class="headerlink" title="8.1 Write a method to generate the nth Fibonacci number"></a><strong>8.1 Write a method to generate the nth Fibonacci number</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Recursively</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Invalid n"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n ==<span class="number">0</span> || n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fibonacci(n<span class="number">-1</span>)+fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Interatively</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fibonacci2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Invalid n"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n ==<span class="number">0</span> || n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> pre1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> pre2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(n &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        res = pre1 + pre2;</span><br><span class="line">        pre2 = pre1;</span><br><span class="line">        pre1 = res;</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/28/C8/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/26/C7/" itemprop="url">
                   Ctci 读书笔记（八）
                 </a>
@@ -789,146 +937,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/25/intership/" itemprop="url">
-                  找实习的那些日子    --善待挫折
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T23:37:12+08:00" content="2016-05-25">
-              2016-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/实习/" itemprop="url" rel="index">
-                    <span itemprop="name">实习</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/实习/经验/" itemprop="url" rel="index">
-                    <span itemprop="name">经验</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/25/intership/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/intership/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>转眼，已近快五月底了。距离自己3月初投出的第一封简历开始，已经接近3个月了。回首过往，这90天日日夜夜，其中的辛酸与喜悦，也许只有自己才能体会到。我并不是什么计算机大牛，开始转行计算机也才只有半年的时间，并没有可以拿的出手的相关项目，以至于刚开始的时候看着自己的简历，连过简历关的自信都没有。最终能拿到Nvidia的offer，并进入了百度，阿里和网易游戏的终面，靠的算是自己的努力和幸运吧。</p>
-<p>2月底的时候，同学来问我要不要找暑期实习。我当时还跟他说，我没这个打算，暑假要刷题。后来他来我实验室让我看了一下网易游戏的招聘主页，说他投了XX岗位。当时我的心里痒痒的，也想去试一下，正好手头有份简历，索性就填了一下申请资料。投简历是会上瘾的，没过几天，3月1号，阿里校招正式开始，我又完善了一下个人简历，投了阿里的C++开发岗位。因为没有人内推，按照它网站上的招聘公告，要等到4月中统一笔试面试，谁知道投简历的第二天，就接到了来自北京的电话。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/25/intership/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -969,7 +982,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
