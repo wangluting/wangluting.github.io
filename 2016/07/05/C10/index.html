@@ -1,0 +1,667 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Chapter 10 Mathematical在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：
+
+注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)
+不要认为数字一定是int, 例如直线的斜率，除非题目说明了
+
+题目10.1 You have a basketball hoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ctci 读书笔记（十一）">
+<meta property="og:url" content="http://yoursite.com/2016/07/05/C10/index.html">
+<meta property="og:site_name" content="Luting's blog">
+<meta property="og:description" content="Chapter 10 Mathematical在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：
+
+注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)
+不要认为数字一定是int, 例如直线的斜率，除非题目说明了
+
+题目10.1 You have a basketball hoop">
+<meta property="og:updated_time" content="2016-07-05T15:22:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ctci 读书笔记（十一）">
+<meta name="twitter:description" content="Chapter 10 Mathematical在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：
+
+注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)
+不要认为数字一定是int, 例如直线的斜率，除非题目说明了
+
+题目10.1 You have a basketball hoop">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Ctci 读书笔记（十一） | Luting's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luting's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-technology">
+          <a href="/technology" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-thumbs-up"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ctci 读书笔记（十一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-05T23:18:53+08:00" content="2016-07-05">
+              2016-07-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/05/C10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/05/C10/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter-10-Mathematical"><a href="#Chapter-10-Mathematical" class="headerlink" title="Chapter 10 Mathematical"></a>Chapter 10 Mathematical</h2><p>在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：</p>
+<ol>
+<li>注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)</li>
+<li>不要认为数字一定是int, 例如直线的斜率，除非题目说明了</li>
+</ol>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games"><a href="#10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games" class="headerlink" title="10.1 You have a basketball hoop and someone says that you can play 1 of 2 games"></a><strong>10.1 You have a basketball hoop and someone says that you can play 1 of 2 games</strong></h4><p><strong>Game #1: You get one shot to make the hoop</strong><br><strong>Game #2: You get three shots and you have to make 2 of 3 shots. If p is the probability of making a particular shot, for which values of p should you pick one game or the other?</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Game #1: p</span><br><span class="line">Game #2: C(3, 2)*p^2*(1-p) + p^3</span><br><span class="line">So let p &gt; 3*p^2*(1-p) + p^3, then p the threshold tp pick one game.</span><br></pre></td></tr></table></figure></p>
+<h4 id="10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon"><a href="#10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon" class="headerlink" title="10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon"></a><strong>10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">题目中没有提到蚂蚁的速度，需要和面试官确认是否会出现一只蚂蚁追上另一只蚂蚁的导致的碰撞情况发生</span><br><span class="line">Each ant has two choice, and whatever it picks, the possibility is 0.5. And only all the ants are moving the same direction(clockwise or counter-clockwise), there is no collision. So the probability is 1 - 2*((1/2)^3). </span><br><span class="line">To general, with n ants, the possibility will be:</span><br><span class="line">1 - 2*((1/2)^n)</span><br></pre></td></tr></table></figure>
+<h4 id="10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect"><a href="#10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect" class="headerlink" title="10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect"></a><strong>10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 题目给的细节有限：例如两条线相等算不算相交？直线的格式是什么？</span></span><br><span class="line"><span class="comment">// 假设与面试官讨论后，我们知道：两条线相等算相交，并且可以用截距和斜率表示一条直线（即斜率存在）</span></span><br><span class="line"><span class="comment">// 另外一点需要注意的地方是：直线的截距和斜率要用浮点数表示，要理解浮点数的精度，不能用“＝”判断两个数是否相等</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Line &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> precision = <span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Line(<span class="keyword">double</span> s, <span class="keyword">double</span> i)：slope(s), intercept(i) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isIntersect</span><span class="params">(Line l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">abs</span>(slope - l2.getSlope()) &gt; precision) || (<span class="built_in">abs</span>(intercept-l2.getIntercept()) &lt; precision); </span><br><span class="line">        <span class="comment">// different slope or same slope &amp; intercept(same line) will intersect</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getSlope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> slope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getIntercept</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intercept;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> slope;</span><br><span class="line">    <span class="keyword">double</span> intercept;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/03/C9/" rel="next" title="Ctci 读书笔记（十）">
+                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（十）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/05/C10/"
+           data-title="Ctci 读书笔记（十一）" data-url="http://yoursite.com/2016/07/05/C10/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.JPG"
+               alt="Luting" />
+          <p class="site-author-name" itemprop="name">Luting</p>
+          <p class="site-description motion-element" itemprop="description">程序媛的日常</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-10-Mathematical"><span class="nav-number">1.</span> <span class="nav-text">Chapter 10 Mathematical</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games"><span class="nav-number">1.1.1.</span> <span class="nav-text">10.1 You have a basketball hoop and someone says that you can play 1 of 2 games</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon"><span class="nav-number">1.1.2.</span> <span class="nav-text">10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect"><span class="nav-number">1.1.3.</span> <span class="nav-text">10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016.5 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luting</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luting"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
