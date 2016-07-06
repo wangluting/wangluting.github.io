@@ -253,6 +253,143 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/17/C2/" itemprop="url">
+                  Ctci 读书笔记（三）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T23:33:11+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/C2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/C2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-2-Linked-Lists"><a href="#Chapter-2-Linked-Lists" class="headerlink" title="Chapter 2 Linked Lists"></a>Chapter 2 Linked Lists</h2><h3 id="实现："><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3><p>链表操作在面试中很常见。链表和数组最大的区别是插入和删除节点的时间复杂度是O(1)，而查找的时间复杂度是O(N)。面试者必须掌握如何创建一个链表，插入，删除一个节点。<br>C++ STL中list实现了双向链表的功能。以下是例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Constructor</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l1; <span class="comment">//empty list</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l2(<span class="number">4</span>, <span class="number">1</span>); <span class="comment">// 4 ints with value 1</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l3(l2.begin(), l2.end()); <span class="comment">//iterating through l2</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; l4&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;; <span class="comment">// 3 ints with values 1,2,3</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Iterator</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">    <span class="keyword">for</span>(it = l4.begin(); it != l4.end(); it++) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Add and delete last element </span></span><br><span class="line">    l4.push_back(<span class="number">4</span>);</span><br><span class="line">    l4.push_back(<span class="number">5</span>);</span><br><span class="line">    l4.pop_back();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Add and delete first element</span></span><br><span class="line">    l4.push_front(<span class="number">0</span>);</span><br><span class="line">    l4.push_front(<span class="number">-1</span>);</span><br><span class="line">    l4.pop_front();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Access first and last element</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"First element of l4 is: "</span> &lt;&lt; l4.front &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Last element of l4 is: "</span> &lt;&lt; <span class="number">14.</span>back() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Assign new content </span></span><br><span class="line">    l1 = l4;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Size of l1: "</span> &lt;&lt; l1.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">    l4.assign(l2.begin(), l2.end());</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Size of l4: "</span> &lt;&lt; l4.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Insert and erase element at any position</span></span><br><span class="line">    l4.insert(l4.begin()+<span class="number">3</span>, <span class="number">10</span>);</span><br><span class="line">    l4.erase(l4.end()<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>复杂的链表操作并不常见，而且我们需要链表的时候一般是自己实现一个链表：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Node &#123;</span><br><span class="line">    Node* next;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    Node(<span class="keyword">int</span> val):value(val), next(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//往链表的末尾添加新结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addToTail</span><span class="params">(Node* &amp;head, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">// 这里要注意，head是一个引用指针类型。因为如果链表为空，那么我们往里面插入一个节点，就会改变头指针。因此必须把head设置为可以改变指针值的指针，否则出了这个函数head仍然是一个空指针</span></span><br><span class="line">    Node* newNode = <span class="keyword">new</span> Node(val);</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        head = newNode; <span class="comment">// 容易忽略往空链表插入节点的情况</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node* p = head;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>) p = p-&gt;next;</span><br><span class="line">        p-&gt;next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个指定值的结点</span></span><br><span class="line"><span class="comment">// 分别考虑删除的是头结点，中间结点和尾结点的情况</span></span><br><span class="line"><span class="comment">// 同时要考虑到链表不含指定值的情况,以及空链表的情况</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteOfTail</span><span class="params">(Node* &amp;head, <span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//同理，头指针也要设置为引用类型，因为有可能被改变</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    Node* pdelete = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(head-&gt;value == val) &#123; <span class="comment">//删除的是头结点</span></span><br><span class="line">        pdelete = head;</span><br><span class="line">        head = head-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node* p = head;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; p-&gt;next-&gt;value != val) &#123; <span class="comment">//循环跳出有两种条件：一是走到了末尾仍没有找到指定值，二是找到了指定值；尾结点和中间节点可以合并</span></span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; p-&gt;next-&gt;value == val) &#123;</span><br><span class="line">            pdelete = p-&gt;next;</span><br><span class="line">            p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pdelete!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> pdelete;</span><br><span class="line">        pdelete = <span class="literal">NULL</span>; <span class="comment">//set pointer to NULL after deletion</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/17/C2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/17/C1/" itemprop="url">
                   Ctci 读书笔记（二）
                 </a>
@@ -687,7 +824,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

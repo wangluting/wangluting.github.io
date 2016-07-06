@@ -253,6 +253,155 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/06/C11/" itemprop="url">
+                  Ctci 读书笔记（十一）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-06T23:25:16+08:00" content="2016-07-06">
+              2016-07-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/06/C11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/06/C11/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-11-Testing"><a href="#Chapter-11-Testing" class="headerlink" title="Chapter 11 Testing"></a>Chapter 11 Testing</h2><p>测试相关的问题不仅仅只会出现在测试工程师的面试中，而且会出现在一般的程序员面试中，用来考察程序员对代码测试的能力。一个好的程序员要知道如何测试自己写的代码。<br>常见的测试问题包括：</p>
+<ol>
+<li>解释如何测试真实世界中的物体（笔，夹子等）</li>
+<li>解释如何测试软件（浏览器）</li>
+<li>编写测试代码</li>
+</ol>
+<p>针对第一种情况，我们可以举出一个例子：问如何测试夹子（paperclip）?<br>遇到这种问题，首先应该弄清楚：这个夹子的用途是什么，以及使用的人群是哪类？ 这个夹子可能是给教师拿来夹试卷的，也可能是给手工艺者拿来设计折纸的。不同的用途会有不同的答案。在确保弄清楚用途和使用者后，接着要考虑的是：</p>
+<ol>
+<li>测试用例的范围是什么？例如：夹两张纸，最多夹30张纸。</li>
+<li>如何定义不合格？</li>
+<li>除了要求的用途外，是否还有其他用途。</li>
+<li>测试的极端条件是什么什么？高温，低温等</li>
+</ol>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="11-1-Find-the-mistake-s-in-the-following-code"><a href="#11-1-Find-the-mistake-s-in-the-following-code" class="headerlink" title="11.1 Find the mistake(s) in the following code:"></a><strong>11.1 Find the mistake(s) in the following code:</strong></h4><p>1 unsigned int i;<br>2 for(i=100;i&lt;=0;–i) 3 printf(“%d\n”, i);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">显而易见永远不会进入循环，因此很容易知道需要将&quot;i&lt;=0&quot;改成&quot;i&gt;=0&quot;. </span><br><span class="line">但是这样简单地一改又会掉入另一个陷阱。由于i是unsigned int, 当i减到0后，继续减一并不是-1, 而是2^32-1, 同样大于0，因此循环永远不会退出。</span><br><span class="line">因此需要将&quot;i&gt;=0&quot;改为&quot;i&gt;0&quot;. </span><br><span class="line">另一个小的更改是将&quot;%d&quot;改为&quot;%u&quot;.</span><br></pre></td></tr></table></figure></p>
+<h4 id="11-2-You-are-given-the-source-to-an-application-which-crashes-when-it-is-run-After-running-it-ten-times-in-a-debugger-you-find-it-never-crashes-in-the-same-place-The-application-is-single-threaded-and-uses-only-the-C-standard-library-What-programming-errors-could-be-causing-this-crash-How-would-you-test-each-one"><a href="#11-2-You-are-given-the-source-to-an-application-which-crashes-when-it-is-run-After-running-it-ten-times-in-a-debugger-you-find-it-never-crashes-in-the-same-place-The-application-is-single-threaded-and-uses-only-the-C-standard-library-What-programming-errors-could-be-causing-this-crash-How-would-you-test-each-one" class="headerlink" title="11.2 You are given the source to an application which crashes when it is run After running it ten times in a debugger, you  find it never crashes in the same place. The application is single threaded, and uses only the C standard library What programming errors could be causing this crash? How would you test each one?"></a><strong>11.2 You are given the source to an application which crashes when it is run After running it ten times in a debugger, you  find it never crashes in the same place. The application is single threaded, and uses only the C standard library What programming errors could be causing this crash? How would you test each one?</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这道问题的解答依赖于application的类型，因此需要与面试官交流，不同的application隐含的潜在error不一样。如果application是web server, 那么有可能的原因是内存泄漏；如果是系统层面的program, 那么可能与系统的依赖相关。</span><br><span class="line"></span><br><span class="line">比较general的答案有：</span><br><span class="line">1. 随机变量：程序可能使用了某些随机的变量，因此每次出错的地方不一样，随机变量例如：用户输入，随机数，时间等。</span><br><span class="line">2. 内存泄漏，程序中可能出现了内存不足或者栈溢出等情况。</span><br><span class="line">3. 程序有依赖：程序依赖于另一个程序,模块,参数等。如果有另一个程序更改了系统参数，而我们的程序依赖于系统参数，这样每次出错的地方就不一样。（在底层代码中经常会出现这种问题，因为依赖于system property）</span><br></pre></td></tr></table></figure>
+<h4 id="11-3-We-have-the-following-method-used-in-a-chess-game-boolean-canMoveTo-int-x-int-y-x-and-y-are-the-coordinates-of-the-chess-board-and-it-returns-whether-or-not-the-piece-can-move-to-that-position-Explain-how-you-would-test-this-method"><a href="#11-3-We-have-the-following-method-used-in-a-chess-game-boolean-canMoveTo-int-x-int-y-x-and-y-are-the-coordinates-of-the-chess-board-and-it-returns-whether-or-not-the-piece-can-move-to-that-position-Explain-how-you-would-test-this-method" class="headerlink" title="11.3 We have the following method used in a chess game: boolean canMoveTo(int x, int y) x and y are the coordinates of the chess board and it returns whether or not the piece can move to that position Explain how you would test this method"></a><strong>11.3 We have the following method used in a chess game: boolean canMoveTo(int x, int y) x and y are the coordinates of the chess board and it returns whether or not the piece can move to that position Explain how you would test this method</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">需要测试的有两点：</span><br><span class="line">1. 输入/输出的有效性</span><br><span class="line">2. 功能测试</span><br><span class="line">对于1，测试输入是否合法：</span><br><span class="line">1) 尝试输入负数</span><br><span class="line">2) 尝试输入超过棋盘范围的x，y</span><br><span class="line">对于上述测试，需要返回false或者抛出异常</span><br><span class="line">测试输出是否合法：这道题没有意义，因为bool的返回值true或者false对于题目而言都合法</span><br><span class="line">对于2，测试程序的功能，如果对于每一个棋子的每一步都测试，则数据量太大，我们可以做一个合理的抽样。</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/06/C11/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/05/C10/" itemprop="url">
                   Ctci 读书笔记（十一）
                 </a>
@@ -872,146 +1021,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/22/C6/" itemprop="url">
-                  Ctci 读书笔记（七）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-22T22:25:19+08:00" content="2016-06-22">
-              2016-06-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/22/C6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/22/C6/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Chapter-6-Brain-Teasers"><a href="#Chapter-6-Brain-Teasers" class="headerlink" title="Chapter 6 Brain Teasers"></a>Chapter 6 Brain Teasers</h2><p>在面试中可能会被问到一些脑筋急转弯的问题（尽管一些公司规定在面试过程中禁止问这类的题目）。遇到这类问题的时候不要慌，因为有些时候面试官只是想看你对待这类智力题的反应，他们并不要求面试者能立马想出完美的答案来。这时候要多跟面试官交流，让他们直到你是怎么思考的，而不是想不出答案也不说话。</p>
-<p>实际上，这类的问题通常都与计算机知识相关（特别注意题目出现的数字，比如说1000，就要想到1024，2的10次方之类的）。好的建议是将问题简化，看看能不能解决一个子问题或者想出在某个特例下的解法，然后再尝试将问题扩大到更普遍的解法。</p>
-<p>举个例子，你现在需要准确的15分钟来煎鸡蛋，但是你没有钟表。你唯一有的是两条绳子。这两条绳子有个特点，那就是将任意一根绳子点燃直到燃尽所花的时间是准确的一个小时（60分钟）。绳子是不均匀的，即将绳子剪成两半点燃其中的一半所花的时间不是准确的30分钟。请问你该怎么计时来煎鸡蛋？</p>
-<p>这道题看起来不可解，但是通过将问题简化就可以想出解法。</p>
-<blockquote>
-<p>现在可以精确的计算60分钟（通过燃烧一条绳子）<br>如何精确计算30分钟呢？ 即如何让绳子的燃烧速度变为之前的两倍？<br>对，从一条绳子的两端同时点燃<br>那怎么精确计算15分钟呢？<br>这样想，如果我们有一条燃尽需要30分钟的绳子，那么通过两端同时点燃就可以精确计算15分钟了<br>那如何可以得到一条燃尽需要30分钟的绳子呢？<br>对，让两个绳子同时点燃，不同的是，一条绳子从一头燃烧，另一条绳子从两段同时燃烧。当一条绳子<br>燃尽的时候，我们就直到已经过去了30分钟了，即另一条绳子燃尽还需30分钟，此时再把另一条绳子的<br>另一头点燃，即剩下的绳子在15分钟会燃尽，此时开始煎鸡蛋就可以了。</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/22/C6/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1057,7 +1066,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

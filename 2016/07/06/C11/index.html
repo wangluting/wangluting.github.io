@@ -84,31 +84,34 @@
 
 
 
-<meta name="description" content="Chapter 10 Mathematical在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：
+<meta name="description" content="Chapter 11 Testing测试相关的问题不仅仅只会出现在测试工程师的面试中，而且会出现在一般的程序员面试中，用来考察程序员对代码测试的能力。一个好的程序员要知道如何测试自己写的代码。常见的测试问题包括：
 
-注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)
-不要认为数字一定是int, 例如直线的斜率，除非题目说明了
+解释如何测试真实世界中的物体（笔，夹子等）
+解释如何测试软件（浏览器）
+编写测试代码
 
-题目10.1 You have a basketball hoop">
+针对第一种情况，我们可以举出一个例子：问如何测试夹子（paperclip）?遇到这种问题，首先应">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ctci 读书笔记（十一）">
-<meta property="og:url" content="http://yoursite.com/2016/07/05/C10/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/07/06/C11/index.html">
 <meta property="og:site_name" content="Luting's blog">
-<meta property="og:description" content="Chapter 10 Mathematical在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：
+<meta property="og:description" content="Chapter 11 Testing测试相关的问题不仅仅只会出现在测试工程师的面试中，而且会出现在一般的程序员面试中，用来考察程序员对代码测试的能力。一个好的程序员要知道如何测试自己写的代码。常见的测试问题包括：
 
-注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)
-不要认为数字一定是int, 例如直线的斜率，除非题目说明了
+解释如何测试真实世界中的物体（笔，夹子等）
+解释如何测试软件（浏览器）
+编写测试代码
 
-题目10.1 You have a basketball hoop">
-<meta property="og:updated_time" content="2016-07-05T15:22:26.000Z">
+针对第一种情况，我们可以举出一个例子：问如何测试夹子（paperclip）?遇到这种问题，首先应">
+<meta property="og:updated_time" content="2016-07-06T15:26:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ctci 读书笔记（十一）">
-<meta name="twitter:description" content="Chapter 10 Mathematical在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：
+<meta name="twitter:description" content="Chapter 11 Testing测试相关的问题不仅仅只会出现在测试工程师的面试中，而且会出现在一般的程序员面试中，用来考察程序员对代码测试的能力。一个好的程序员要知道如何测试自己写的代码。常见的测试问题包括：
 
-注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)
-不要认为数字一定是int, 例如直线的斜率，除非题目说明了
+解释如何测试真实世界中的物体（笔，夹子等）
+解释如何测试软件（浏览器）
+编写测试代码
 
-题目10.1 You have a basketball hoop">
+针对第一种情况，我们可以举出一个例子：问如何测试夹子（paperclip）?遇到这种问题，首先应">
 
 
 
@@ -278,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T23:18:53+08:00" content="2016-07-05">
-              2016-07-05
+            <time itemprop="dateCreated" datetime="2016-07-06T23:25:16+08:00" content="2016-07-06">
+              2016-07-06
             </time>
           </span>
 
@@ -320,8 +323,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/05/C10/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/05/C10/" itemprop="commentsCount"></span>
+                <a href="/2016/07/06/C11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/06/C11/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -344,14 +347,22 @@
       
 
       
-        <h2 id="Chapter-10-Mathematical"><a href="#Chapter-10-Mathematical" class="headerlink" title="Chapter 10 Mathematical"></a>Chapter 10 Mathematical</h2><p>在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：</p>
+        <h2 id="Chapter-11-Testing"><a href="#Chapter-11-Testing" class="headerlink" title="Chapter 11 Testing"></a>Chapter 11 Testing</h2><p>测试相关的问题不仅仅只会出现在测试工程师的面试中，而且会出现在一般的程序员面试中，用来考察程序员对代码测试的能力。一个好的程序员要知道如何测试自己写的代码。<br>常见的测试问题包括：</p>
 <ol>
-<li>注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)</li>
-<li>不要认为数字一定是int, 例如直线的斜率，除非题目说明了</li>
+<li>解释如何测试真实世界中的物体（笔，夹子等）</li>
+<li>解释如何测试软件（浏览器）</li>
+<li>编写测试代码</li>
 </ol>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games"><a href="#10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games" class="headerlink" title="10.1 You have a basketball hoop and someone says that you can play 1 of 2 games"></a><strong>10.1 You have a basketball hoop and someone says that you can play 1 of 2 games</strong></h4><p><strong>Game #1: You get one shot to make the hoop</strong><br><strong>Game #2: You get three shots and you have to make 2 of 3 shots. If p is the probability of making a particular shot, for which values of p should you pick one game or the other?</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Game #1: p</span><br><span class="line">Game #2: C(3, 2)*p^2*(1-p) + p^3</span><br><span class="line">So let p &gt; 3*p^2*(1-p) + p^3, then p the threshold tp pick one game.</span><br></pre></td></tr></table></figure></p>
-<h4 id="10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon"><a href="#10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon" class="headerlink" title="10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon"></a><strong>10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">题目中没有提到蚂蚁的速度，需要和面试官确认是否会出现一只蚂蚁追上另一只蚂蚁的导致的碰撞情况发生</span><br><span class="line">Each ant has two choice, and whatever it picks, the possibility is 0.5. And only all the ants are moving the same direction(clockwise or counter-clockwise), there is no collision. So the probability is 1 - 2*((1/2)^3). </span><br><span class="line">To general, with n ants, the possibility will be:</span><br><span class="line">1 - 2*((1/2)^n)</span><br></pre></td></tr></table></figure>
-<h4 id="10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect"><a href="#10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect" class="headerlink" title="10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect"></a><strong>10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 题目给的细节有限：例如两条线相等算不算相交？直线的格式是什么？</span></span><br><span class="line"><span class="comment">// 假设与面试官讨论后，我们知道：两条线相等算相交，并且可以用截距和斜率表示一条直线（即斜率存在）</span></span><br><span class="line"><span class="comment">// 另外一点需要注意的地方是：直线的截距和斜率要用浮点数表示，要理解浮点数的精度，不能用“＝”判断两个数是否相等</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Line &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> precision = <span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Line(<span class="keyword">double</span> s, <span class="keyword">double</span> i)：slope(s), intercept(i) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isIntersect</span><span class="params">(Line l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">abs</span>(slope - l2.getSlope()) &gt; precision) || (<span class="built_in">abs</span>(intercept-l2.getIntercept()) &lt; precision); </span><br><span class="line">        <span class="comment">// different slope or same slope &amp; intercept(same line) will intersect</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getSlope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> slope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getIntercept</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intercept;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> slope;</span><br><span class="line">    <span class="keyword">double</span> intercept;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>针对第一种情况，我们可以举出一个例子：问如何测试夹子（paperclip）?<br>遇到这种问题，首先应该弄清楚：这个夹子的用途是什么，以及使用的人群是哪类？ 这个夹子可能是给教师拿来夹试卷的，也可能是给手工艺者拿来设计折纸的。不同的用途会有不同的答案。在确保弄清楚用途和使用者后，接着要考虑的是：</p>
+<ol>
+<li>测试用例的范围是什么？例如：夹两张纸，最多夹30张纸。</li>
+<li>如何定义不合格？</li>
+<li>除了要求的用途外，是否还有其他用途。</li>
+<li>测试的极端条件是什么什么？高温，低温等</li>
+</ol>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="11-1-Find-the-mistake-s-in-the-following-code"><a href="#11-1-Find-the-mistake-s-in-the-following-code" class="headerlink" title="11.1 Find the mistake(s) in the following code:"></a><strong>11.1 Find the mistake(s) in the following code:</strong></h4><p>1 unsigned int i;<br>2 for(i=100;i&lt;=0;–i) 3 printf(“%d\n”, i);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">显而易见永远不会进入循环，因此很容易知道需要将&quot;i&lt;=0&quot;改成&quot;i&gt;=0&quot;. </span><br><span class="line">但是这样简单地一改又会掉入另一个陷阱。由于i是unsigned int, 当i减到0后，继续减一并不是-1, 而是2^32-1, 同样大于0，因此循环永远不会退出。</span><br><span class="line">因此需要将&quot;i&gt;=0&quot;改为&quot;i&gt;0&quot;. </span><br><span class="line">另一个小的更改是将&quot;%d&quot;改为&quot;%u&quot;.</span><br></pre></td></tr></table></figure></p>
+<h4 id="11-2-You-are-given-the-source-to-an-application-which-crashes-when-it-is-run-After-running-it-ten-times-in-a-debugger-you-find-it-never-crashes-in-the-same-place-The-application-is-single-threaded-and-uses-only-the-C-standard-library-What-programming-errors-could-be-causing-this-crash-How-would-you-test-each-one"><a href="#11-2-You-are-given-the-source-to-an-application-which-crashes-when-it-is-run-After-running-it-ten-times-in-a-debugger-you-find-it-never-crashes-in-the-same-place-The-application-is-single-threaded-and-uses-only-the-C-standard-library-What-programming-errors-could-be-causing-this-crash-How-would-you-test-each-one" class="headerlink" title="11.2 You are given the source to an application which crashes when it is run After running it ten times in a debugger, you  find it never crashes in the same place. The application is single threaded, and uses only the C standard library What programming errors could be causing this crash? How would you test each one?"></a><strong>11.2 You are given the source to an application which crashes when it is run After running it ten times in a debugger, you  find it never crashes in the same place. The application is single threaded, and uses only the C standard library What programming errors could be causing this crash? How would you test each one?</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这道问题的解答依赖于application的类型，因此需要与面试官交流，不同的application隐含的潜在error不一样。如果application是web server, 那么有可能的原因是内存泄漏；如果是系统层面的program, 那么可能与系统的依赖相关。</span><br><span class="line"></span><br><span class="line">比较general的答案有：</span><br><span class="line">1. 随机变量：程序可能使用了某些随机的变量，因此每次出错的地方不一样，随机变量例如：用户输入，随机数，时间等。</span><br><span class="line">2. 内存泄漏，程序中可能出现了内存不足或者栈溢出等情况。</span><br><span class="line">3. 程序有依赖：程序依赖于另一个程序,模块,参数等。如果有另一个程序更改了系统参数，而我们的程序依赖于系统参数，这样每次出错的地方就不一样。（在底层代码中经常会出现这种问题，因为依赖于system property）</span><br></pre></td></tr></table></figure>
+<h4 id="11-3-We-have-the-following-method-used-in-a-chess-game-boolean-canMoveTo-int-x-int-y-x-and-y-are-the-coordinates-of-the-chess-board-and-it-returns-whether-or-not-the-piece-can-move-to-that-position-Explain-how-you-would-test-this-method"><a href="#11-3-We-have-the-following-method-used-in-a-chess-game-boolean-canMoveTo-int-x-int-y-x-and-y-are-the-coordinates-of-the-chess-board-and-it-returns-whether-or-not-the-piece-can-move-to-that-position-Explain-how-you-would-test-this-method" class="headerlink" title="11.3 We have the following method used in a chess game: boolean canMoveTo(int x, int y) x and y are the coordinates of the chess board and it returns whether or not the piece can move to that position Explain how you would test this method"></a><strong>11.3 We have the following method used in a chess game: boolean canMoveTo(int x, int y) x and y are the coordinates of the chess board and it returns whether or not the piece can move to that position Explain how you would test this method</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">需要测试的有两点：</span><br><span class="line">1. 输入/输出的有效性</span><br><span class="line">2. 功能测试</span><br><span class="line">对于1，测试输入是否合法：</span><br><span class="line">1) 尝试输入负数</span><br><span class="line">2) 尝试输入超过棋盘范围的x，y</span><br><span class="line">对于上述测试，需要返回false或者抛出异常</span><br><span class="line">测试输出是否合法：这道题没有意义，因为bool的返回值true或者false对于题目而言都合法</span><br><span class="line">对于2，测试程序的功能，如果对于每一个棋子的每一步都测试，则数据量太大，我们可以做一个合理的抽样。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
       
@@ -385,17 +396,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/03/C9/" rel="next" title="Ctci 读书笔记（十）">
-                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（十）
+              <a href="/2016/07/05/C10/" rel="next" title="Ctci 读书笔记（十一）">
+                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（十一）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/06/C11/" rel="prev" title="Ctci 读书笔记（十一）">
-                Ctci 读书笔记（十一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -421,8 +428,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/05/C10/"
-           data-title="Ctci 读书笔记（十一）" data-url="http://yoursite.com/2016/07/05/C10/">
+      <div class="ds-thread" data-thread-key="2016/07/06/C11/"
+           data-title="Ctci 读书笔记（十一）" data-url="http://yoursite.com/2016/07/06/C11/">
       </div>
     
   </div>
@@ -513,7 +520,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-10-Mathematical"><span class="nav-number">1.</span> <span class="nav-text">Chapter 10 Mathematical</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games"><span class="nav-number">1.1.1.</span> <span class="nav-text">10.1 You have a basketball hoop and someone says that you can play 1 of 2 games</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon"><span class="nav-number">1.1.2.</span> <span class="nav-text">10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect"><span class="nav-number">1.1.3.</span> <span class="nav-text">10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-11-Testing"><span class="nav-number">1.</span> <span class="nav-text">Chapter 11 Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#11-1-Find-the-mistake-s-in-the-following-code"><span class="nav-number">1.1.1.</span> <span class="nav-text">11.1 Find the mistake(s) in the following code:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-2-You-are-given-the-source-to-an-application-which-crashes-when-it-is-run-After-running-it-ten-times-in-a-debugger-you-find-it-never-crashes-in-the-same-place-The-application-is-single-threaded-and-uses-only-the-C-standard-library-What-programming-errors-could-be-causing-this-crash-How-would-you-test-each-one"><span class="nav-number">1.1.2.</span> <span class="nav-text">11.2 You are given the source to an application which crashes when it is run After running it ten times in a debugger, you  find it never crashes in the same place. The application is single threaded, and uses only the C standard library What programming errors could be causing this crash? How would you test each one?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-3-We-have-the-following-method-used-in-a-chess-game-boolean-canMoveTo-int-x-int-y-x-and-y-are-the-coordinates-of-the-chess-board-and-it-returns-whether-or-not-the-piece-can-move-to-that-position-Explain-how-you-would-test-this-method"><span class="nav-number">1.1.3.</span> <span class="nav-text">11.3 We have the following method used in a chess game: boolean canMoveTo(int x, int y) x and y are the coordinates of the chess board and it returns whether or not the piece can move to that position Explain how you would test this method</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
