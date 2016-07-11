@@ -253,6 +253,142 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/26/C7/" itemprop="url">
+                  Ctci 读书笔记（八）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-26T23:21:34+08:00" content="2016-06-26">
+              2016-06-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/26/C7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/26/C7/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Chapter-7-Object-Oriented-Design"><a href="#Chapter-7-Object-Oriented-Design" class="headerlink" title="Chapter 7 Object Oriented Design"></a>Chapter 7 Object Oriented Design</h2><p>面向对象设计在面试中经常会遇到，对这一类问题的解答可以反映出程序员写代码的功力。这类问题常常被故意描述地很模糊，面试官关注于面试者能否做出假设，能否向面试官确认问题条件。因此面试者遇到OOD的问题时要向面试官确认题目，排除歧义。<br>软件中的面向对象和真实生活中的面向对象很相像。需要弄清楚以下几个问题：</p>
+<blockquote>
+<p>目标是什么？如果是设计一副牌，那么你需要向面试官确认，要拿这一副牌做什么？是否可以假设这副牌拿来做一些通用的纸牌游戏？如果是要设计一个停车场，那么这个停车场是否是要得到某个停车位是否被占用，同一类型的车在停车场中有多少辆之类的<br>然后，想一想需要哪些父类，又需要哪些子类？例如设计一个停车场，需要设计车辆，停车场，停车位，停车计时器等父类。其中车辆有多个子类，停车位是有残疾人停车位等子类。<br>接着，想一想自己是否遗漏了一些信息。例如如何设计停车限制，分别依赖于时间或者停车费。进一步丰富类的种类和内容。<br>最后，具体化这些类。设计方法获得停车时间，停车位是否被占用等。思考如何表示数据可以使这些方法更加高效。</p>
+</blockquote>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="7-1-Design-the-data-structures-for-a-generic-deck-of-cards-Explain-how-you-would-sub-class-it-to-implement-particular-card-games"><a href="#7-1-Design-the-data-structures-for-a-generic-deck-of-cards-Explain-how-you-would-sub-class-it-to-implement-particular-card-games" class="headerlink" title="7.1 Design the data structures for a generic deck of cards Explain how you would sub- class it to implement particular card games."></a><strong>7.1 Design the data structures for a generic deck of cards Explain how you would sub- class it to implement particular card games.</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> Card &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Suit &#123;</span><br><span class="line">        CLUBS (<span class="number">1</span>), SPADES (<span class="number">2</span>), HEARTS (<span class="number">3</span>), DIAMONDS (<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> value;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Suit</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;value = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Card(<span class="keyword">int</span> num, Suit suit) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;num = num;</span><br><span class="line">        <span class="keyword">this</span>-&gt;suit = suit;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Suit <span class="title">suit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> suit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    Suit suit;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设现在我们需要实现blackjack纸牌游戏（21点）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> BlackJack extends <span class="title">Card</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BlackJack</span><span class="params">(<span class="keyword">int</span> value, Suit, suit)</span> </span>&#123;</span><br><span class="line">        super(value, suit);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r = super.value();</span><br><span class="line">        <span class="keyword">if</span>(r &gt;= <span class="number">10</span> &amp;&amp; r &lt;= <span class="number">13</span>) <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (r == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/22/C6/" itemprop="url">
                   Ctci 读书笔记（七）
                 </a>
@@ -788,142 +924,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/21/C3/" itemprop="url">
-                  Ctci 读书笔记（四）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-21T13:18:31+08:00" content="2016-05-21">
-              2016-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/21/C3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/21/C3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Chapter-3-Stacks-and-Queues"><a href="#Chapter-3-Stacks-and-Queues" class="headerlink" title="Chapter 3 Stacks and Queues"></a>Chapter 3 Stacks and Queues</h2><h3 id="实现："><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3><h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><p>Stack是LIFO数据结构<br>C++ STL中的stack和queue叫适配器（containers adaptors），而不叫容器，是对容器的再封装。<br>Underlying containers 可以是vector, deque和 list。By default, 底层容器是deque（封闭头部）<br>一般使用deque和list，而不使用vector，原因是vector扩容（reallocate）耗时<br>PS. deque是双端队列，可以提供随机访问，支持首尾的快速增删。看起来很像vector，区别是deque提供了首的快速增删，并且deque在内存中的存储是不连续的，因此deque在某些情况下比vector更高效（针对元素多，扩容很频繁的情况）<br>list是双向链表，支持任意位置的快速增删（前提是有一个iterator指向待删除的地方，并且返回的iterator仍然有效），但是不支持随机访问，在内存中的存取也是不连续的。</p>
-<hr>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Constructor</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; first; <span class="comment">//empty stack</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="keyword">int</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; second; <span class="comment">//empty stack using vector</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Insert element </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">        first.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Access element </span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Pop out element: "</span> &lt;&lt; first.top() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Pop element </span></span><br><span class="line">    first.pop();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Size </span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; first.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/21/C3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -969,7 +969,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
