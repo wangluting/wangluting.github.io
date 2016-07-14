@@ -253,6 +253,287 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/14/C14/" itemprop="url">
+                  Ctci 读书笔记（十五）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-14T21:53:53+08:00" content="2016-07-14">
+              2016-07-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/14/C14/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/14/C14/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Chapter-16-Low-level"><a href="#Chapter-16-Low-level" class="headerlink" title="Chapter 16 Low level"></a>Chapter 16 Low level</h2><p>这一大类的问题主要考察的是面试者对计算机相关的一些基本概念的理解。对于需要面试者对于这类相关问题的理解程度则取决于公司的需要。一般来说，需要了解的只是概念层，能够解释清楚相关的概念就好了。</p>
+<h4 id="端序"><a href="#端序" class="headerlink" title="端序"></a>端序</h4><p>端序是字节的存储顺序。如果数据是单字节的，那么如何存储就无所谓了，然后对于多字节数据，比如说int，double等，就要考虑存储的顺序了。<br>字节序是硬件层面的东西，对于软件是透明的，只和处理器架构有关，和编程语言无关；x86是小端序<br>大端序：数据的高位字节存放在地址的低端，低位字节存放在地址的高端<br>小端序：数据的高位字节存放在地址的高端，低位字节存放在地址的低端<br>好的记忆方法是：大端序按照数字的书写顺序进行存储的</p>
+<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><ol>
+<li>代码区：存放函数体（类成员函数和全局函数）的二进制代码。</li>
+<li>栈区（stack）：由编译器自动分配释放 ，存放为运行函数而分配的局部变量、函数参数、返回数据、返回地址等。其操作方式类似于数据结构中的栈。</li>
+<li>堆区（heap）：一般由程序员分配释放（new/delete malloc/free）， 若程序员不释放，程序结束时可能由 OS 回收 。分配方式类似于链表。</li>
+<li>全局区（静态区）：存放全局变量、静态数据、常量。程序结束后由系统释放</li>
+<li>常量区： 常量字符串就是放在这里的。 程序结束后由系统释放。</li>
+</ol>
+<h4 id="malloc-free与new-delete的区别"><a href="#malloc-free与new-delete的区别" class="headerlink" title="malloc/free与new/delete的区别"></a>malloc/free与new/delete的区别</h4><p>new是运算符，malloc是库函数<br>运算符使用是否正确，编译器在编译扫描分析时就可以判定<br>库函数是已编译的代码，编译器不会编译检查，由链接器将库同用户写的代码合成exe文件</p>
+<p>对于非内部数据类型的对象而言，光用maloc/free无法满足动态对象的要求。对象在创建的同时要自动执行构造函数，对象在消亡之前要自动执行析构函数。由于malloc/free是库函数而不是运算符，不在编译器控制权限之内，不能够把执行构造函数和析构函数的任务强加于malloc/free。因此C++语言需要一个能完成动态内存分配和初始化工作的运算符new，以及一个能完成清理与释放内存工作的运算符delete。由于malloc/free是库函数，不是运算符，他们不能执行构造函数和析构函数，只是负责分配内存。</p>
+<p>new 建立的是一个对象，malloc分配的是一块内存。 new建立的对象你可以把它当成一个普通的对象，用成员函数访问，不要直接访问它的地址空间。 malloc分配的是一块内存区域，就用指针访问好了，而且还可以在里面移动指针。</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="16-1-Explain-the-following-terms-virtual-memory-page-fault-thrashing"><a href="#16-1-Explain-the-following-terms-virtual-memory-page-fault-thrashing" class="headerlink" title="16.1 Explain the following terms: virtual memory, page fault, thrashing"></a><strong>16.1 Explain the following terms: virtual memory, page fault, thrashing</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">虚拟内存: 是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存 （一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片， 还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。 与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易， 对真正的物理内存（例如RAM）的使用也更有效率。</span><br><span class="line"></span><br><span class="line">缺页中断: 一个页(Page)是一个固定容量的内存区块，是物理内存和外部存储(如硬盘等) 传输的单位。当一个程序访问一个映射到地址空间却实际并未加载到物理内存的页（page）时， 硬件向软件发出的一次中断（或异常）就是一个缺页中断或叫页错误（page fault）。</span><br><span class="line"></span><br><span class="line">抖动: 在分页存储管理系统中，内存中只存放了那些经常使用的页面， 而其它页面则存放在外存中，当进程运行需要的内容不在内存时， 便启动磁盘读操作将所需内容调入内存，若内存中没有空闲物理块， 还需要将内存中的某页面置换出去。也就是说，系统需要不断地在内外存之间交换信息。 若在系统运行过程中，刚被淘汰出内存的页面，过后不久又要访问它， 需要再次将其调入。而该页面调入内存后不久又再次被淘汰出内存，然后又要访问它。 如此反复，使得系统把大部分时间用在了页面的调入/换出上， 而几乎不能完成任何有效的工作，这种现象称为抖动。</span><br></pre></td></tr></table></figure>
+<h4 id="16-2-What-is-a-Branch-Target-buffer-Explain-how-it-can-be-used-in-reducing-bubble-cycles-in-cases-of-branch-misprediction"><a href="#16-2-What-is-a-Branch-Target-buffer-Explain-how-it-can-be-used-in-reducing-bubble-cycles-in-cases-of-branch-misprediction" class="headerlink" title="16.2 What is a Branch Target buffer? Explain how it can be used in reducing bubble cycles in cases of branch misprediction."></a><strong>16.2 What is a Branch Target buffer? Explain how it can be used in reducing bubble cycles in cases of branch misprediction.</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Branch misprediction occurs when the CPU mispredicts the next instruction to be executed.</span><br><span class="line">The CPU uses pipelining which allows several instructions to be processed simultaneously. But during a conditional jump, the next instruction to be executed depends on the result of the condition. Branch Prediction tries to guess the next instruction. However, if the guess is wrong, we are penalized because the instruction which was executed must be discarded.</span><br><span class="line">Branch Target Buffer (BTB) reduces the penalty by predicting the path of the branch, computing the target of the branch and caching the information used by the branch. There will be no stalls if the branch entry found on BTB and the prediction is correct, otherwise the penalty will be at least two cycles.</span><br></pre></td></tr></table></figure>
+<h4 id="16-3-Describe-direct-memory-access-DMA-Can-a-user-level-buffer-pointer-be-used-by-kernel-or-drivers"><a href="#16-3-Describe-direct-memory-access-DMA-Can-a-user-level-buffer-pointer-be-used-by-kernel-or-drivers" class="headerlink" title="16.3 Describe direct memory access (DMA). Can a user level buffer / pointer be used by kernel or drivers?"></a><strong>16.3 Describe direct memory access (DMA). Can a user level buffer / pointer be used by kernel or drivers?</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Direct Memory is a feature which provides direct access (read/write) to system memory without interaction from the CPU. </span><br><span class="line">The “DMA Controller” manages this by requesting the System bus access (DMA request) from CPU. CPU completes its current task and grants access by asserting</span><br><span class="line">DMA acknowledgement signal. Once it gets the access, it reads/writes the data and</span><br><span class="line">returns back the system bus to the CPU by asserting the bus release signal. This transfer is faster than the usual transfer by CPU. Between this time CPU is involved with processing task which doesn’t require memory access.</span><br><span class="line">By using DMA, drivers can access the memory allocated to the user level buffer / pointer.</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/14/C13/" itemprop="url">
+                  Ctci 读书笔记（十四）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-14T21:50:08+08:00" content="2016-07-14">
+              2016-07-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/14/C13/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/14/C13/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Chapter-15-Databases"><a href="#Chapter-15-Databases" class="headerlink" title="Chapter 15 Databases"></a>Chapter 15 Databases</h2><p>涉及到数据库相关的问题有：写sql语句；针对某一场景设计数据库等。<br>举个例子：假设现在需要你去为一个国际的房屋租赁公司设计数据库。<br>需要有的表有：property, building, apartment, manager, tenant.<br>需要弄清楚它们之间的关系：one property could have multiple manager, a manager could hold many properties; a building could only be one property, a apartment could only be one building; a apartment could have multiple tenants, a tennat could rent many apartment.<br>有的时候，表很大在做表的连接时就会比较慢，这时候需要考虑将一些信息放在同一个表中，因此有些数据可能会重复存储。这是一个trade-off.</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="15-1-Write-a-method-to-find-the-number-of-employees-in-each-department"><a href="#15-1-Write-a-method-to-find-the-number-of-employees-in-each-department" class="headerlink" title="15.1 Write a method to find the number of employees in each department"></a><strong>15.1 Write a method to find the number of employees in each department</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dept_name, dept_id, <span class="keyword">COUNT</span> (*) <span class="keyword">FROM</span> departments <span class="keyword">AS</span> employee_number</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> employees <span class="keyword">ON</span> employees.dept_id = departments.dept_id <span class="keyword">GROUP</span> <span class="keyword">BY</span> departments.dept_id, dept_name;</span><br><span class="line"></span><br><span class="line">这里使用左连接的原因是在employees表中没有纪录的department也需要包含进来，即包含employee为0的department</span><br></pre></td></tr></table></figure>
+<h4 id="15-2-What-are-the-different-types-of-joins-Please-explain-how-they-differ-and-why-certain-types-are-better-in-certain-situations"><a href="#15-2-What-are-the-different-types-of-joins-Please-explain-how-they-differ-and-why-certain-types-are-better-in-certain-situations" class="headerlink" title="15.2 What are the different types of joins? Please explain how they differ and why certain types are better in certain situations"></a><strong>15.2 What are the different types of joins? Please explain how they differ and why certain types are better in certain situations</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SQL中的连接指的是将两个或多个表组合起来。其中，每个表至少包含一个相同的字段，而不同的连接类型决定哪些记录会出现在返回的结果中。</span><br><span class="line">连接分为两大类：</span><br><span class="line">内连接（Inner join）：结果这包含两个表中严格匹配的记录</span><br><span class="line">外连接（Outer join）：包含内连接的记录，同时也包含了一些其他记录</span><br><span class="line">1）左外连接（Left join/Left outer join）：简称左连接, 结果返回左表中的所有记录，对于右表没有匹配的记录，来自右表的所有列设为NULL</span><br><span class="line">2）右外连接（Right join/Right outer join）：简称右连接, 结果返回右表中的所有记录，对于左表没有匹配的记录，来自左表的所有列设为NULL</span><br><span class="line">3）全连接（Full outer join）：是左右连接的并集, 结果包含被连接表中的所有记录。对于缺少匹配的记录， 以NULL来填充</span><br></pre></td></tr></table></figure>
+<h4 id="15-3-What-is-denormalization-Explain-the-pros-and-cons"><a href="#15-3-What-is-denormalization-Explain-the-pros-and-cons" class="headerlink" title="15.3 What is denormalization? Explain the pros and cons"></a><strong>15.3 What is denormalization? Explain the pros and cons</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">反范式是通过增加冗余数据或者数据分组来提高数据库读性能的过程。在某些情况下，反范式会掩盖关系型数据库软件的低效。关系型的范式数据库即使做过优化， 也常常会带来沉重的访问负载。</span><br><span class="line"></span><br><span class="line">数据库的范式设计会存储不同但相关的信息在不同的逻辑表， 如果这些表的存储在物理上也是分离的，那么从几个表中完成数据库的查询可能就会很慢 (比如JOIN操作)。如果JOIN操作的表很多，那么可能会慢得离谱。 有两个办法可以解决这个问题。首选的方法是使逻辑上的设计遵循范式， 但允许数据库管理系统(DBMS)在磁盘上存储额外的冗余信息来加快查询响应。 在这种情况下，DBMS还要保证冗余副本与原始数据的一致性。 这种方法通常在SQL中以索引视图(微软的SQL Server)或物化视图(Oracle)实现。 视图将信息表示为方便查询的格式，索引确保视图上的查询进行了优化。</span><br><span class="line"></span><br><span class="line">更常见的做法是对数据做反范式设计。这种方法同样能提高查询响应速度， 但此时不再是DBMS而是数据库设计者去保证数据的一致性。 数据库设计者们通过在数据库中创建规则来保证数据的一致性，这些规则叫约束。 这样一来，数据库设计的逻辑复杂度就增加了，同时额外约束的复杂度也增加了， 这使该方法变得危险。此外，“约束”在加快读操作(SELECT)的同时，减慢了写操作 (INSERT, UPDATE和DELETE)。这意味着一个反范式设计的数据库， 可能比它的范式版本有着更差的写性能。</span><br><span class="line"></span><br><span class="line">反范式数据模型与没有范式化的数据模型不同。 只有在范式化已经达到一定的满意水平并且所需的约束和规则都已经建立起来， 才进行反范式化。例如，所有的关系都属于第三范式， 连接的关系和多值依赖得到了妥善处理。</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/11/C12/" itemprop="url">
                   Ctci 读书笔记（十三）
                 </a>
@@ -698,374 +979,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/03/C9/" itemprop="url">
-                  Ctci 读书笔记（十）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-03T23:49:14+08:00" content="2016-07-03">
-              2016-07-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/03/C9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/03/C9/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Chapter-9-Sorting-and-Searching"><a href="#Chapter-9-Sorting-and-Searching" class="headerlink" title="Chapter 9 Sorting and Searching"></a>Chapter 9 Sorting and Searching</h2><p>排序和查找问题是面试中的高频问题。当我们遇到一个排序问题时，好的做法是比较不同的排序算法然后找到一个最适合于该应用背景的。例如：现在有很大一批人，让你根据他们的年龄排序。从这个问题我们应该提炼出2个关键点：</p>
-<ol>
-<li>待排序的对象有很多</li>
-<li>排序的值是人的年龄，而年龄这个数字的范围是比较小且有界的<br>从以上两点我们可以得出最适合的排序应该是桶排序，时间复杂度为O(n), 空间复杂度也是常数级。</li>
-</ol>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>常用算法的特点：</p>
-<table>
-<thead>
-<tr>
-<th>排序算法</th>
-<th style="text-align:center">时间复杂度:平均/最好/最坏</th>
-<th style="text-align:center">空间复杂度:平均/最好/最坏</th>
-<th style="text-align:center">稳定性</th>
-<th style="text-align:center">适用情景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>冒泡排序</td>
-<td style="text-align:center">o(n2)/o(n)/o(n2)</td>
-<td style="text-align:center">o(1)/o(1)/o(1)</td>
-<td style="text-align:center">稳定</td>
-<td style="text-align:center">小规模数据</td>
-</tr>
-<tr>
-<td>插入排序</td>
-<td style="text-align:center">o(n2)/o(n)/o(n2)</td>
-<td style="text-align:center">o(1)/o(1)/o(1)</td>
-<td style="text-align:center">稳定</td>
-<td style="text-align:center">基本有序数据</td>
-</tr>
-<tr>
-<td>希尔排序</td>
-<td style="text-align:center">o(nlogn)/o(n)/o(ns(1&lt;s&lt;2))</td>
-<td style="text-align:center">o(1)/o(1)/o(1)</td>
-<td style="text-align:center">不稳定</td>
-<td style="text-align:center">类似插入排序</td>
-</tr>
-<tr>
-<td>堆排序</td>
-<td style="text-align:center">o(nlogn)/o(nlogn)/o(nlogn)</td>
-<td style="text-align:center">o(1)/o(1)/o(1)</td>
-<td style="text-align:center">不稳定</td>
-<td style="text-align:center">海量数据找k个</td>
-</tr>
-<tr>
-<td>归并排序</td>
-<td style="text-align:center">o(nlogn)/o(nlogn)/o(nlogn)</td>
-<td style="text-align:center">o(n+logn)/同样</td>
-<td style="text-align:center">稳定</td>
-<td style="text-align:center">递归耗内存</td>
-</tr>
-<tr>
-<td>快速排序</td>
-<td style="text-align:center">o(nlogn)/o(nlogn)/o(n2)</td>
-<td style="text-align:center">o(logn)/o(logn)/o(n)</td>
-<td style="text-align:center">不稳定</td>
-<td style="text-align:center">最普遍</td>
-</tr>
-<tr>
-<td>计数排序</td>
-<td style="text-align:center">o(n+k)/o(n+k)/o(n+k)</td>
-<td style="text-align:center">o(n+k)/o(n+k)/o(n+k)</td>
-<td style="text-align:center">稳定</td>
-<td style="text-align:center">数据有特殊性质</td>
-</tr>
-<tr>
-<td>桶排序</td>
-<td style="text-align:center">o(n+k)/o(n+k)/o(n+k)</td>
-<td style="text-align:center">o(n+k)/o(n+k)/o(n+k)</td>
-<td style="text-align:center">稳定</td>
-<td style="text-align:center">数据有特殊性质</td>
-</tr>
-<tr>
-<td>基数排序</td>
-<td style="text-align:center">o(n<em>d)/o(n</em>d)/o(n*d)</td>
-<td style="text-align:center">o(n)/o(n)/o(n)</td>
-<td style="text-align:center">稳定</td>
-<td style="text-align:center">多元数组排序</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/03/C9/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/28/C8/" itemprop="url">
-                  Ctci 读书笔记（九）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-28T23:55:41+08:00" content="2016-06-28">
-              2016-06-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/28/C8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/28/C8/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Chapter-8-Recursion"><a href="#Chapter-8-Recursion" class="headerlink" title="Chapter 8 Recursion"></a>Chapter 8 Recursion</h2><p>面试中会遇到许多可以用递归解决的问题，这类问题都有一些共同点：那就是它们都可以拆解成小的问题，即解决这个问题可以通过解决它的子问题来解决。可以用递归解决的问题通常（但不总是）有规律可循，例如：设计一个算法去解决<strong>第n个</strong>；写代码列出<strong>前n个</strong>；实现一个方法去计算<strong>所有的</strong>。</p>
-<p>遇到这类问题，通常可以通过以下的步骤去分析：</p>
-<ol>
-<li>想一想子问题是什么？有多少个子问题</li>
-<li>解决base case. 如果需要f(n),那么base case就是f(0)或f(1). 它的值一般是hard-code，可以从题目推出</li>
-<li>由base case继续解决f(2),f(3)</li>
-<li>仔细思考f(3)是如何从f(2)得到的，即弄明白由子问题如何推得大问题的解</li>
-<li>得到f(n)这个通用的解<br>自底向上的解法通常十分直接。有的时候自顶向下的方法也可行。</li>
-</ol>
-<p>在解决递归问题的时候，有两点需要注意的：</p>
-<ol>
-<li>所有用递归解决的问题都可以用迭代来解决（虽然用迭代的解法可能会使得代码更加复杂）。在用递归解决问题之前，问问自己如果用迭代来解决会有多复杂。可以和你的面试官讨论trade-off.</li>
-<li>递归的解法比较浪费空间，你可以想想每一次调用都往栈里面加了一层，意味着如果你的代码时间复杂度为o(n)，那么空间复杂度也至少为o(n).这也是为什么迭代的解法更好。</li>
-</ol>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="8-1-Write-a-method-to-generate-the-nth-Fibonacci-number"><a href="#8-1-Write-a-method-to-generate-the-nth-Fibonacci-number" class="headerlink" title="8.1 Write a method to generate the nth Fibonacci number"></a><strong>8.1 Write a method to generate the nth Fibonacci number</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Recursively</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Invalid n"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n ==<span class="number">0</span> || n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fibonacci(n<span class="number">-1</span>)+fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Interatively</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fibonacci2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Invalid n"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n ==<span class="number">0</span> || n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> pre1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> pre2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(n &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        res = pre1 + pre2;</span><br><span class="line">        pre2 = pre1;</span><br><span class="line">        pre1 = res;</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/28/C8/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1106,7 +1024,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

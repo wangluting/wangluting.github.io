@@ -253,6 +253,287 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/27/C4/" itemprop="url">
+                  Ctci 读书笔记（五）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-27T17:36:29+08:00" content="2016-05-27">
+              2016-05-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/27/C4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/27/C4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-4-Trees-and-Graphs"><a href="#Chapter-4-Trees-and-Graphs" class="headerlink" title="Chapter 4 Trees and Graphs"></a>Chapter 4 Trees and Graphs</h2><p>树和图是面试中经常被问到的两种数据结构，常以一下两种方式出现：</p>
+<ul>
+<li>Implement a tree/find a node/delete a node/other well known algorithm</li>
+<li>Implement a modification of a known algorithm<br>在面试前，务必理解掌握树的相关算法。</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h4><p>需要注意的是，对于binary tree,面试者经常会把它默认为binary search tree, 然而面试官经常就只是指的是binary tree. 因此面试者要仔细听是否有关键词”search”.实在不清楚的话，需要向面试官提问。<br>关于二叉树，必须熟练掌握的算法：</p>
+<ul>
+<li>先序遍历(Pre-order)</li>
+<li>中序遍历(In-order)</li>
+<li>后序遍历(Post-order)</li>
+<li>插入节点(向二叉搜索树中插入节点，和根节点比较，如果大于根节点就向右遍历，小于根节点就向左遍历，直到找到一个空位插入。虽然二叉搜索树中节点的调整和删除很少在面试中出现，但是如果你知道具体是如何做的，会让你的表现较其他面试者更加突出)</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先序遍历</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> TreeNode &#123;</span><br><span class="line">	<span class="keyword">int</span> value;</span><br><span class="line">	TreeNode* left;</span><br><span class="line">	TreeNode* right;</span><br><span class="line">	TreeNode(<span class="keyword">int</span> val) :value(val),left(<span class="literal">NULL</span>),right(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorderRecursive</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; head-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	preorderRecursive(head-&gt;left);</span><br><span class="line">	preorderRecursive(head-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归实现</span></span><br><span class="line"><span class="comment">//非递归先序遍历在第一次访问到节点的时候输出节点，并且从该节点向左和向右依次遍历。因此需要用到一个数据结构可以保存节点信息的，当从左子树返回时可以引导到右子树。stack LIFO的特性可以作为这样的数据结构</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorderIterative</span><span class="params">(TreeNode* head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">	TreeNode* p = head;</span><br><span class="line">	<span class="keyword">while</span> (!s.empty() || p) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p) &#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; p-&gt;value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			s.push(p);</span><br><span class="line">			p = p-&gt;left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			p = s.top();</span><br><span class="line">			s.pop();</span><br><span class="line">			p = p-&gt;right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/27/C4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/25/intership/" itemprop="url">
+                  找实习的那些日子    --善待挫折
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-25T23:37:12+08:00" content="2016-05-25">
+              2016-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实习/" itemprop="url" rel="index">
+                    <span itemprop="name">实习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实习/经验/" itemprop="url" rel="index">
+                    <span itemprop="name">经验</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/25/intership/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/intership/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>转眼，已近快五月底了。距离自己3月初投出的第一封简历开始，已经接近3个月了。回首过往，这90天日日夜夜，其中的辛酸与喜悦，也许只有自己才能体会到。我并不是什么计算机大牛，开始转行计算机也才只有半年的时间，并没有可以拿的出手的相关项目，以至于刚开始的时候看着自己的简历，连过简历关的自信都没有。最终能拿到Nvidia的offer，并进入了百度，阿里和网易游戏的终面，靠的算是自己的努力和幸运吧。</p>
+<p>2月底的时候，同学来问我要不要找暑期实习。我当时还跟他说，我没这个打算，暑假要刷题。后来他来我实验室让我看了一下网易游戏的招聘主页，说他投了XX岗位。当时我的心里痒痒的，也想去试一下，正好手头有份简历，索性就填了一下申请资料。投简历是会上瘾的，没过几天，3月1号，阿里校招正式开始，我又完善了一下个人简历，投了阿里的C++开发岗位。因为没有人内推，按照它网站上的招聘公告，要等到4月中统一笔试面试，谁知道投简历的第二天，就接到了来自北京的电话。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/25/intership/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/21/C3/" itemprop="url">
                   Ctci 读书笔记（四）
                 </a>
@@ -641,285 +922,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/14/ctci1/" itemprop="url">
-                  Ctci 读书笔记（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-14T22:50:06+08:00" content="2016-05-14">
-              2016-05-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/14/ctci1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/14/ctci1/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>好记性不如烂笔头。<br>今天开始读Cracking the coding interview。<br>希望能在8月份去美国之前把这本书读完一遍。</p>
-</blockquote>
-<h2 id="面试前"><a href="#面试前" class="headerlink" title="面试前"></a>面试前</h2><ul>
-<li>练习在白板上手写代码，可以通过在纸上写代码，然后再在编译器上写来练习</li>
-<li>对自己的简历上的项目很熟悉，对于每一个项目，想出来一个最难的和一个最有趣的细节，可以和面试官讨论的</li>
-<li>不要尝试去背答案，而是通过编程练习来强化你的技能</li>
-<li>说话大声，与面试官积极交流，让面试官了解你的想法，他们才能给你一些指导</li>
-<li>最后，要记住，<strong>Interviews are hard!</strong> 尽管你在面试过程中可能被问了比较简单的问题，但是简单的问题并不意味着能拿到offer。拿到offer并不是因为你在面试中回答对了所有的问题，而是<strong><em>answering questions better than others</em></strong>. 因此，当你拿到了一个比较tricky的问题时不要慌张，因为别人拿到这道题也是很难的，你要做的就是表现的比其他人出色，就够了。</li>
-</ul>
-<h3 id="面试背后的那些事："><a href="#面试背后的那些事：" class="headerlink" title="面试背后的那些事："></a>面试背后的那些事：</h3><blockquote>
-<p>面试过程就像是一个黑箱子，面试者走进去，接收了一些问题，然后走出来，从箱子里拿出一个offer or not。面试者想知道箱子里究竟发生了什么?</p>
-<ol>
-<li>面试官是如何做决定的</li>
-<li>面试官之间会讨论吗</li>
-<li>公司真正想招什么样的人才  </li>
-</ol>
-</blockquote>
-<h4 id="微软"><a href="#微软" class="headerlink" title="微软:"></a>微软:</h4><ul>
-<li>4-5轮on-site, 一般是两个不同的团队。当完成了一个团队的所有面试后，如果进行到了hr面试，可以认为前面的面试都过了，决定权在最后这个人手里</li>
-<li>微软想要的人是对技术有激情的人,Geeks</li>
-<li>“Why do you want to work for Microsoft?”<br>Microsoft want to see that you are passinate about technology. For example, “I’ve been using Microsoft software as long as I can remember, and I am really impressed at how Microsoft manages to create a product that is universally excellent”</li>
-</ul>
-<h4 id="亚马逊："><a href="#亚马逊：" class="headerlink" title="亚马逊："></a>亚马逊：</h4><ul>
-<li>1-2轮电话面试，写一段简单的代码并在电话中大声朗读出来。然后一些比较广泛的问题，去挖掘面试者熟悉哪一方面；通过了的话，就会邀请去总部on-site。一般是根据你的简历和电话面试结果，有1-2个组会对你进行面试。在白板上写代码。</li>
-<li>Amazon is a web-based company, that means they care about scale. Make sure you prepare for questions in “large” scale.</li>
-<li>Amazon tends to ask a lot of questions about OOD. </li>
-</ul>
-<h4 id="谷歌："><a href="#谷歌：" class="headerlink" title="谷歌："></a>谷歌：</h4><ul>
-<li>首先是电面，会问一些难题。On-site会有4-6个人对你进行面试，其中一个是lunch interviewer. 他并不会给出feedback，所以可以问他“诚实”的问题。其他面试官的反馈会被汇总到一起，根据面试者的Analytical Ability, Coding, Experience, Communication四个方面的得分综合判定，不太考虑电面的成绩。</li>
-<li>Google is web-based company, cares about how to design a scalable system from “System Design and Memory Limits”</li>
-<li>bit manipulation </li>
-</ul>
-<h4 id="苹果"><a href="#苹果" class="headerlink" title="苹果"></a>苹果</h4><ul>
-<li>首先是几轮电面。如果被邀请on-site，一般是6-8个面试，1-on-1 or 2-on-1. 白板写代码。</li>
-<li>需要了解苹果的文化，产品，如果知道具体面试的团队，可以准备一些对他们组产品的建议，表现出自己对苹果公司的热情。</li>
-</ul>
-<h3 id="简历建议："><a href="#简历建议：" class="headerlink" title="简历建议："></a>简历建议：</h3><blockquote>
-<p>面试官期待从简历中看到的两点:<br>1 你是否够聪明<br>2 你是否会写代码</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/14/ctci1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/11/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-11T19:56:07+08:00" content="2016-05-11">
-              2016-05-11
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/11/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to my home!</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -960,7 +967,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

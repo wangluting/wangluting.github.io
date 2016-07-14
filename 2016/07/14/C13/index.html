@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="Chapter 7 Object Oriented Design面向对象设计在面试中经常会遇到，对这一类问题的解答可以反映出程序员写代码的功力。这类问题常常被故意描述地很模糊，面试官关注于面试者能否做出假设，能否向面试官确认问题条件。因此面试者遇到OOD的问题时要向面试官确认题目，排除歧义。软件中的面向对象和真实生活中的面向对象很相像。需要弄清楚以下几个问题：
-
-目标是什么？如果是设计一副牌，那么">
+<meta name="description" content="Chapter 15 Databases涉及到数据库相关的问题有：写sql语句；针对某一场景设计数据库等。举个例子：假设现在需要你去为一个国际的房屋租赁公司设计数据库。需要有的表有：property, building, apartment, manager, tenant.需要弄清楚它们之间的关系：one property could have multiple manager, a manag">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ctci 读书笔记（八）">
-<meta property="og:url" content="http://yoursite.com/2016/06/26/C7/index.html">
+<meta property="og:title" content="Ctci 读书笔记（十四）">
+<meta property="og:url" content="http://yoursite.com/2016/07/14/C13/index.html">
 <meta property="og:site_name" content="Luting's blog">
-<meta property="og:description" content="Chapter 7 Object Oriented Design面向对象设计在面试中经常会遇到，对这一类问题的解答可以反映出程序员写代码的功力。这类问题常常被故意描述地很模糊，面试官关注于面试者能否做出假设，能否向面试官确认问题条件。因此面试者遇到OOD的问题时要向面试官确认题目，排除歧义。软件中的面向对象和真实生活中的面向对象很相像。需要弄清楚以下几个问题：
-
-目标是什么？如果是设计一副牌，那么">
-<meta property="og:updated_time" content="2016-06-26T15:24:37.000Z">
+<meta property="og:description" content="Chapter 15 Databases涉及到数据库相关的问题有：写sql语句；针对某一场景设计数据库等。举个例子：假设现在需要你去为一个国际的房屋租赁公司设计数据库。需要有的表有：property, building, apartment, manager, tenant.需要弄清楚它们之间的关系：one property could have multiple manager, a manag">
+<meta property="og:updated_time" content="2016-07-14T13:56:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ctci 读书笔记（八）">
-<meta name="twitter:description" content="Chapter 7 Object Oriented Design面向对象设计在面试中经常会遇到，对这一类问题的解答可以反映出程序员写代码的功力。这类问题常常被故意描述地很模糊，面试官关注于面试者能否做出假设，能否向面试官确认问题条件。因此面试者遇到OOD的问题时要向面试官确认题目，排除歧义。软件中的面向对象和真实生活中的面向对象很相像。需要弄清楚以下几个问题：
-
-目标是什么？如果是设计一副牌，那么">
+<meta name="twitter:title" content="Ctci 读书笔记（十四）">
+<meta name="twitter:description" content="Chapter 15 Databases涉及到数据库相关的问题有：写sql语句；针对某一场景设计数据库等。举个例子：假设现在需要你去为一个国际的房屋租赁公司设计数据库。需要有的表有：property, building, apartment, manager, tenant.需要弄清楚它们之间的关系：one property could have multiple manager, a manag">
 
 
 
@@ -117,7 +111,7 @@
   };
 </script>
 
-  <title> Ctci 读书笔记（八） | Luting's blog </title>
+  <title> Ctci 读书笔记（十四） | Luting's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +251,7 @@
             
             
               
-                Ctci 读书笔记（八）
+                Ctci 读书笔记（十四）
               
             
           </h1>
@@ -269,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-26T23:21:34+08:00" content="2016-06-26">
-              2016-06-26
+            <time itemprop="dateCreated" datetime="2016-07-14T21:50:08+08:00" content="2016-07-14">
+              2016-07-14
             </time>
           </span>
 
@@ -311,8 +305,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/26/C7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/26/C7/" itemprop="commentsCount"></span>
+                <a href="/2016/07/14/C13/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/14/C13/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,11 +329,10 @@
       
 
       
-        <h2 id="Chapter-7-Object-Oriented-Design"><a href="#Chapter-7-Object-Oriented-Design" class="headerlink" title="Chapter 7 Object Oriented Design"></a>Chapter 7 Object Oriented Design</h2><p>面向对象设计在面试中经常会遇到，对这一类问题的解答可以反映出程序员写代码的功力。这类问题常常被故意描述地很模糊，面试官关注于面试者能否做出假设，能否向面试官确认问题条件。因此面试者遇到OOD的问题时要向面试官确认题目，排除歧义。<br>软件中的面向对象和真实生活中的面向对象很相像。需要弄清楚以下几个问题：</p>
-<blockquote>
-<p>目标是什么？如果是设计一副牌，那么你需要向面试官确认，要拿这一副牌做什么？是否可以假设这副牌拿来做一些通用的纸牌游戏？如果是要设计一个停车场，那么这个停车场是否是要得到某个停车位是否被占用，同一类型的车在停车场中有多少辆之类的<br>然后，想一想需要哪些父类，又需要哪些子类？例如设计一个停车场，需要设计车辆，停车场，停车位，停车计时器等父类。其中车辆有多个子类，停车位是有残疾人停车位等子类。<br>接着，想一想自己是否遗漏了一些信息。例如如何设计停车限制，分别依赖于时间或者停车费。进一步丰富类的种类和内容。<br>最后，具体化这些类。设计方法获得停车时间，停车位是否被占用等。思考如何表示数据可以使这些方法更加高效。</p>
-</blockquote>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="7-1-Design-the-data-structures-for-a-generic-deck-of-cards-Explain-how-you-would-sub-class-it-to-implement-particular-card-games"><a href="#7-1-Design-the-data-structures-for-a-generic-deck-of-cards-Explain-how-you-would-sub-class-it-to-implement-particular-card-games" class="headerlink" title="7.1 Design the data structures for a generic deck of cards Explain how you would sub- class it to implement particular card games."></a><strong>7.1 Design the data structures for a generic deck of cards Explain how you would sub- class it to implement particular card games.</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> Card &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Suit &#123;</span><br><span class="line">        CLUBS (<span class="number">1</span>), SPADES (<span class="number">2</span>), HEARTS (<span class="number">3</span>), DIAMONDS (<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> value;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Suit</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;value = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Card(<span class="keyword">int</span> num, Suit suit) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;num = num;</span><br><span class="line">        <span class="keyword">this</span>-&gt;suit = suit;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Suit <span class="title">suit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> suit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    Suit suit;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设现在我们需要实现blackjack纸牌游戏（21点）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> BlackJack extends <span class="title">Card</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BlackJack</span><span class="params">(<span class="keyword">int</span> value, Suit, suit)</span> </span>&#123;</span><br><span class="line">        super(value, suit);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r = super.value();</span><br><span class="line">        <span class="keyword">if</span>(r &gt;= <span class="number">10</span> &amp;&amp; r &lt;= <span class="number">13</span>) <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (r == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="Chapter-15-Databases"><a href="#Chapter-15-Databases" class="headerlink" title="Chapter 15 Databases"></a>Chapter 15 Databases</h2><p>涉及到数据库相关的问题有：写sql语句；针对某一场景设计数据库等。<br>举个例子：假设现在需要你去为一个国际的房屋租赁公司设计数据库。<br>需要有的表有：property, building, apartment, manager, tenant.<br>需要弄清楚它们之间的关系：one property could have multiple manager, a manager could hold many properties; a building could only be one property, a apartment could only be one building; a apartment could have multiple tenants, a tennat could rent many apartment.<br>有的时候，表很大在做表的连接时就会比较慢，这时候需要考虑将一些信息放在同一个表中，因此有些数据可能会重复存储。这是一个trade-off.</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="15-1-Write-a-method-to-find-the-number-of-employees-in-each-department"><a href="#15-1-Write-a-method-to-find-the-number-of-employees-in-each-department" class="headerlink" title="15.1 Write a method to find the number of employees in each department"></a><strong>15.1 Write a method to find the number of employees in each department</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dept_name, dept_id, <span class="keyword">COUNT</span> (*) <span class="keyword">FROM</span> departments <span class="keyword">AS</span> employee_number</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> employees <span class="keyword">ON</span> employees.dept_id = departments.dept_id <span class="keyword">GROUP</span> <span class="keyword">BY</span> departments.dept_id, dept_name;</span><br><span class="line"></span><br><span class="line">这里使用左连接的原因是在employees表中没有纪录的department也需要包含进来，即包含employee为0的department</span><br></pre></td></tr></table></figure>
+<h4 id="15-2-What-are-the-different-types-of-joins-Please-explain-how-they-differ-and-why-certain-types-are-better-in-certain-situations"><a href="#15-2-What-are-the-different-types-of-joins-Please-explain-how-they-differ-and-why-certain-types-are-better-in-certain-situations" class="headerlink" title="15.2 What are the different types of joins? Please explain how they differ and why certain types are better in certain situations"></a><strong>15.2 What are the different types of joins? Please explain how they differ and why certain types are better in certain situations</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SQL中的连接指的是将两个或多个表组合起来。其中，每个表至少包含一个相同的字段，而不同的连接类型决定哪些记录会出现在返回的结果中。</span><br><span class="line">连接分为两大类：</span><br><span class="line">内连接（Inner join）：结果这包含两个表中严格匹配的记录</span><br><span class="line">外连接（Outer join）：包含内连接的记录，同时也包含了一些其他记录</span><br><span class="line">1）左外连接（Left join/Left outer join）：简称左连接, 结果返回左表中的所有记录，对于右表没有匹配的记录，来自右表的所有列设为NULL</span><br><span class="line">2）右外连接（Right join/Right outer join）：简称右连接, 结果返回右表中的所有记录，对于左表没有匹配的记录，来自左表的所有列设为NULL</span><br><span class="line">3）全连接（Full outer join）：是左右连接的并集, 结果包含被连接表中的所有记录。对于缺少匹配的记录， 以NULL来填充</span><br></pre></td></tr></table></figure>
+<h4 id="15-3-What-is-denormalization-Explain-the-pros-and-cons"><a href="#15-3-What-is-denormalization-Explain-the-pros-and-cons" class="headerlink" title="15.3 What is denormalization? Explain the pros and cons"></a><strong>15.3 What is denormalization? Explain the pros and cons</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">反范式是通过增加冗余数据或者数据分组来提高数据库读性能的过程。在某些情况下，反范式会掩盖关系型数据库软件的低效。关系型的范式数据库即使做过优化， 也常常会带来沉重的访问负载。</span><br><span class="line"></span><br><span class="line">数据库的范式设计会存储不同但相关的信息在不同的逻辑表， 如果这些表的存储在物理上也是分离的，那么从几个表中完成数据库的查询可能就会很慢 (比如JOIN操作)。如果JOIN操作的表很多，那么可能会慢得离谱。 有两个办法可以解决这个问题。首选的方法是使逻辑上的设计遵循范式， 但允许数据库管理系统(DBMS)在磁盘上存储额外的冗余信息来加快查询响应。 在这种情况下，DBMS还要保证冗余副本与原始数据的一致性。 这种方法通常在SQL中以索引视图(微软的SQL Server)或物化视图(Oracle)实现。 视图将信息表示为方便查询的格式，索引确保视图上的查询进行了优化。</span><br><span class="line"></span><br><span class="line">更常见的做法是对数据做反范式设计。这种方法同样能提高查询响应速度， 但此时不再是DBMS而是数据库设计者去保证数据的一致性。 数据库设计者们通过在数据库中创建规则来保证数据的一致性，这些规则叫约束。 这样一来，数据库设计的逻辑复杂度就增加了，同时额外约束的复杂度也增加了， 这使该方法变得危险。此外，“约束”在加快读操作(SELECT)的同时，减慢了写操作 (INSERT, UPDATE和DELETE)。这意味着一个反范式设计的数据库， 可能比它的范式版本有着更差的写性能。</span><br><span class="line"></span><br><span class="line">反范式数据模型与没有范式化的数据模型不同。 只有在范式化已经达到一定的满意水平并且所需的约束和规则都已经建立起来， 才进行反范式化。例如，所有的关系都属于第三范式， 连接的关系和多值依赖得到了妥善处理。</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -372,16 +365,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/22/C6/" rel="next" title="Ctci 读书笔记（七）">
-                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（七）
+              <a href="/2016/07/11/C12/" rel="next" title="Ctci 读书笔记（十三）">
+                <i class="fa fa-chevron-left"></i> Ctci 读书笔记（十三）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/28/C8/" rel="prev" title="Ctci 读书笔记（九）">
-                Ctci 读书笔记（九） <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/14/C14/" rel="prev" title="Ctci 读书笔记（十五）">
+                Ctci 读书笔记（十五） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -408,8 +401,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/26/C7/"
-           data-title="Ctci 读书笔记（八）" data-url="http://yoursite.com/2016/06/26/C7/">
+      <div class="ds-thread" data-thread-key="2016/07/14/C13/"
+           data-title="Ctci 读书笔记（十四）" data-url="http://yoursite.com/2016/07/14/C13/">
       </div>
     
   </div>
@@ -500,7 +493,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-7-Object-Oriented-Design"><span class="nav-number">1.</span> <span class="nav-text">Chapter 7 Object Oriented Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-Design-the-data-structures-for-a-generic-deck-of-cards-Explain-how-you-would-sub-class-it-to-implement-particular-card-games"><span class="nav-number">1.1.1.</span> <span class="nav-text">7.1 Design the data structures for a generic deck of cards Explain how you would sub- class it to implement particular card games.</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-15-Databases"><span class="nav-number">1.</span> <span class="nav-text">Chapter 15 Databases</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-Write-a-method-to-find-the-number-of-employees-in-each-department"><span class="nav-number">1.1.1.</span> <span class="nav-text">15.1 Write a method to find the number of employees in each department</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-What-are-the-different-types-of-joins-Please-explain-how-they-differ-and-why-certain-types-are-better-in-certain-situations"><span class="nav-number">1.1.2.</span> <span class="nav-text">15.2 What are the different types of joins? Please explain how they differ and why certain types are better in certain situations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-3-What-is-denormalization-Explain-the-pros-and-cons"><span class="nav-number">1.1.3.</span> <span class="nav-text">15.3 What is denormalization? Explain the pros and cons</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
