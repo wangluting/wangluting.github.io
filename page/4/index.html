@@ -253,6 +253,142 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/17/C1/" itemprop="url">
+                  Ctci 读书笔记（二）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T00:10:07+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/C1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/C1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-1-Arrays-and-Strings"><a href="#Chapter-1-Arrays-and-Strings" class="headerlink" title="Chapter 1 Arrays and Strings"></a>Chapter 1 Arrays and Strings</h2><h3 id="实现："><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3><h4 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h4><p>Before interview, practice both using and implementing hash tables<br>C++11 STL中 unordered_map 实现了 hash_table，下面是一个例子:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//Construct and assign content</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt; umap(&#123; &#123; <span class="string">"Jane"</span>, <span class="number">1</span> &#125;,&#123; <span class="string">"Peter"</span>, <span class="number">2</span> &#125;,&#123; <span class="string">"Amy"</span>, <span class="number">3</span> &#125; &#125;);</span><br><span class="line">	<span class="comment">//or std::unordered_map&lt;std::string, int&gt; umap; umap = &#123;&#123;"Jane", 1&#125;, &#123;"Peter", 2&#125;, &#123;"Amy", 3&#125;&#125;;</span></span><br><span class="line">	umap[<span class="string">"Ann"</span>] = <span class="number">4</span>;</span><br><span class="line">	umap.insert(<span class="built_in">std</span>::make_pair(<span class="string">"Tom"</span>, <span class="number">5</span>)); <span class="comment">// or pair&lt;std::string, int&gt;("Tom" 5)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//Iterators to elements</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"umap contains:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (it = umap.begin(); it != umap.end(); it++) &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">": "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">"; "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"umap's buckets contain:"</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; umap.bucket_count(); i++) &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Bucket"</span> &lt;&lt; i &lt;&lt; <span class="string">"contains:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">for</span> (it = umap.begin(i); it != umap.end(i); it++)&#123;</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">": "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">"; "</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Find element</span></span><br><span class="line">	it = umap.find(<span class="string">"Ann"</span>);</span><br><span class="line">	<span class="keyword">if</span> (it == umap.end()) &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Not found!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Found:"</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">"："</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Erase element</span></span><br><span class="line">	umap.erase(<span class="string">"Ann"</span>);</span><br><span class="line">	it = umap.find(<span class="string">"Ann"</span>);</span><br><span class="line">	<span class="keyword">if</span> (it == umap.end()) &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Not found!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Found:"</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">"："</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	umap.erase(umap.find(<span class="string">"Tom"</span>), umap.end());</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; umap.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Clear the container</span></span><br><span class="line">	umap.clear();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; umap.size();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">umap contains:</span><br><span class="line">Peter: <span class="number">2</span>; Jane: <span class="number">1</span>; Amy: <span class="number">4</span>; Ann: <span class="number">4</span>; Tom: <span class="number">5</span>;</span><br><span class="line">umap buckets contain:</span><br><span class="line">Bucket0contains:</span><br><span class="line">Ann: <span class="number">4</span>;</span><br><span class="line">Bucket1contains:</span><br><span class="line">Peter: <span class="number">2</span>; Jane: <span class="number">1</span>;</span><br><span class="line">Bucket2contains:</span><br><span class="line"></span><br><span class="line">Bucket3contains:</span><br><span class="line">Tom: <span class="number">5</span>;</span><br><span class="line">Bucket4contains:</span><br><span class="line"></span><br><span class="line">Bucket5contains:</span><br><span class="line"></span><br><span class="line">Bucket6contains:</span><br><span class="line">Amy: <span class="number">4</span>;</span><br><span class="line">Bucket7contains:</span><br><span class="line"></span><br><span class="line">Found:Ann：<span class="number">4</span></span><br><span class="line">Not found!</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<hr>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/17/C1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/14/ctci1/" itemprop="url">
                   Ctci 读书笔记（一）
                 </a>
@@ -551,7 +687,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -253,6 +253,147 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/05/C10/" itemprop="url">
+                  Ctci 读书笔记（十一）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-05T23:18:53+08:00" content="2016-07-05">
+              2016-07-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/05/C10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/05/C10/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Chapter-10-Mathematical"><a href="#Chapter-10-Mathematical" class="headerlink" title="Chapter 10 Mathematical"></a>Chapter 10 Mathematical</h2><p>在面试中很多和数学相关的问题起初会被认为是智力题，但是其实它们都能够用逻辑的方法解决。需要注意两点：</p>
+<ol>
+<li>注意精度问题，比如说float和double (通常double小数点后面精确到15-16位，而float精确到7位)</li>
+<li>不要认为数字一定是int, 例如直线的斜率，除非题目说明了</li>
+</ol>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games"><a href="#10-1-You-have-a-basketball-hoop-and-someone-says-that-you-can-play-1-of-2-games" class="headerlink" title="10.1 You have a basketball hoop and someone says that you can play 1 of 2 games"></a><strong>10.1 You have a basketball hoop and someone says that you can play 1 of 2 games</strong></h4><p><strong>Game #1: You get one shot to make the hoop</strong><br><strong>Game #2: You get three shots and you have to make 2 of 3 shots. If p is the probability of making a particular shot, for which values of p should you pick one game or the other?</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Game #1: p</span><br><span class="line">Game #2: C(3, 2)*p^2*(1-p) + p^3</span><br><span class="line">So let p &gt; 3*p^2*(1-p) + p^3, then p the threshold tp pick one game.</span><br></pre></td></tr></table></figure></p>
+<h4 id="10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon"><a href="#10-2-There-are-three-ants-on-di-erent-vertices-of-a-triangle-What-is-the-probability-of-collision-between-any-two-or-all-of-them-if-they-start-walking-on-the-sides-of-the-triangle-Similarly-find-the-probability-of-collision-with-‘n’-ants-on-an-‘n’-vertex-polygon" class="headerlink" title="10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon"></a><strong>10.2 There are three ants on di erent vertices of a triangle What is the probability of collision (between any two or all of them) if they start walking on the sides of the triangle? Similarly  find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">题目中没有提到蚂蚁的速度，需要和面试官确认是否会出现一只蚂蚁追上另一只蚂蚁的导致的碰撞情况发生</span><br><span class="line">Each ant has two choice, and whatever it picks, the possibility is 0.5. And only all the ants are moving the same direction(clockwise or counter-clockwise), there is no collision. So the probability is 1 - 2*((1/2)^3). </span><br><span class="line">To general, with n ants, the possibility will be:</span><br><span class="line">1 - 2*((1/2)^n)</span><br></pre></td></tr></table></figure>
+<h4 id="10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect"><a href="#10-3-Given-two-lines-on-a-Cartesian-plane-determine-whether-the-two-lines-would-intersect" class="headerlink" title="10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect"></a><strong>10.3 Given two lines on a Cartesian plane, determine whether the two lines would intersect</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 题目给的细节有限：例如两条线相等算不算相交？直线的格式是什么？</span></span><br><span class="line"><span class="comment">// 假设与面试官讨论后，我们知道：两条线相等算相交，并且可以用截距和斜率表示一条直线（即斜率存在）</span></span><br><span class="line"><span class="comment">// 另外一点需要注意的地方是：直线的截距和斜率要用浮点数表示，要理解浮点数的精度，不能用“＝”判断两个数是否相等</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Line &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> precision = <span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Line(<span class="keyword">double</span> s, <span class="keyword">double</span> i)：slope(s), intercept(i) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isIntersect</span><span class="params">(Line l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">abs</span>(slope - l2.getSlope()) &gt; precision) || (<span class="built_in">abs</span>(intercept-l2.getIntercept()) &lt; precision); </span><br><span class="line">        <span class="comment">// different slope or same slope &amp; intercept(same line) will intersect</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getSlope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> slope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getIntercept</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intercept;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> slope;</span><br><span class="line">    <span class="keyword">double</span> intercept;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/05/C10/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/03/C9/" itemprop="url">
                   Ctci 读书笔记（十）
                 </a>
@@ -871,141 +1012,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/21/C5/" itemprop="url">
-                  Ctci 读书笔记（六）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-21T23:13:21+08:00" content="2016-06-21">
-              2016-06-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/21/C5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/21/C5/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Chapter-5-Bit-Manipulation"><a href="#Chapter-5-Bit-Manipulation" class="headerlink" title="Chapter 5 Bit Manipulation"></a>Chapter 5 Bit Manipulation</h2><p>位运算就是直接对整数在内存中的二进制位进行操作。由于程序中所有的数在计算机中都是以二进制的形式存储的，因此位运算特别快，而且代码比较简洁。<br>位运算有6种：&amp;（与），｜（或），～（反），^（异或），&lt;&lt; &gt;&gt; （左右移）<br>举个位运算的例子：判断一个无符号整数是否为2的倍数</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果一个数是2的倍数，那么一直用2去除会得到1</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span>(num%<span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        num = num/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num == <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同样的，用位运算也可以做到。</span></span><br><span class="line"><span class="comment">// 2倍数的无符号整数有个显著的特点，即只有一位是1。</span></span><br><span class="line"><span class="comment">// 因此如果是2的倍数，那么x&amp;(x-1)一定是0</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo2</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num &amp;&amp; !(num &amp; (num<span class="number">-1</span>)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/21/C5/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1051,7 +1057,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
