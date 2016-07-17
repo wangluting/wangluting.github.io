@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="面试,读书笔记," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="程序媛的日常">
+<meta name="description" content="Chapter 17 Networking &amp;amp; Threads and LocksOSIOSI: Open System Internection Model, 计算机之间的交互模型， 该模型将网络通讯系统抽象为7层，从底向上分别是：物理层，链路层，网络层，传输层，会话层，表示层，应用层。
+Deadlock死锁就是两个或多个进程无止境地等候着永远不会成立的条件的一种系统状态。在两个或多个并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C15">
+<meta property="og:title" content="Ctci 读书笔记（十六）">
 <meta property="og:url" content="http://yoursite.com/2016/07/17/C15/index.html">
 <meta property="og:site_name" content="Luting's blog">
-<meta property="og:description" content="程序媛的日常">
-<meta property="og:updated_time" content="2016-07-17T15:34:32.000Z">
+<meta property="og:description" content="Chapter 17 Networking &amp;amp; Threads and LocksOSIOSI: Open System Internection Model, 计算机之间的交互模型， 该模型将网络通讯系统抽象为7层，从底向上分别是：物理层，链路层，网络层，传输层，会话层，表示层，应用层。
+Deadlock死锁就是两个或多个进程无止境地等候着永远不会成立的条件的一种系统状态。在两个或多个并">
+<meta property="og:updated_time" content="2016-07-17T15:40:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C15">
-<meta name="twitter:description" content="程序媛的日常">
+<meta name="twitter:title" content="Ctci 读书笔记（十六）">
+<meta name="twitter:description" content="Chapter 17 Networking &amp;amp; Threads and LocksOSIOSI: Open System Internection Model, 计算机之间的交互模型， 该模型将网络通讯系统抽象为7层，从底向上分别是：物理层，链路层，网络层，传输层，会话层，表示层，应用层。
+Deadlock死锁就是两个或多个进程无止境地等候着永远不会成立的条件的一种系统状态。在两个或多个并">
 
 
 
@@ -111,7 +114,7 @@
   };
 </script>
 
-  <title> C15 | Luting's blog </title>
+  <title> Ctci 读书笔记（十六） | Luting's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +254,7 @@
             
             
               
-                C15
+                Ctci 读书笔记（十六）
               
             
           </h1>
@@ -268,6 +271,37 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -298,7 +332,32 @@
       
 
       
-        
+        <h2 id="Chapter-17-Networking-amp-Threads-and-Locks"><a href="#Chapter-17-Networking-amp-Threads-and-Locks" class="headerlink" title="Chapter 17 Networking &amp; Threads and Locks"></a>Chapter 17 Networking &amp; Threads and Locks</h2><h4 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h4><p>OSI: Open System Internection Model, 计算机之间的交互模型， 该模型将网络通讯系统抽象为7层，从底向上分别是：物理层，链路层，网络层，传输层，会话层，表示层，应用层。</p>
+<h4 id="Deadlock"><a href="#Deadlock" class="headerlink" title="Deadlock"></a>Deadlock</h4><p>死锁就是两个或多个进程无止境地等候着永远不会成立的条件的一种系统状态。<br>在两个或多个并发进程中，如果每个过程持有某中资源而又都等待着别的进程释放它或他们现在白吃的资源，否则就不能向前推进。<br>（1）因为系统资源不足。<br>（2）进程运行推进的顺序不合适。<br>（3）资源分配不当等。<br>如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。<br>产生死锁的四个必要条件：<br>（1） 互斥条件：一个资源每次只能被一个进程使用。<br>（2） 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>（3） 不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>（4） 循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。<br>互斥，资源占有，抢先，循环等待<br>这四个条件是死锁的必要条件，只要系统发生死锁，这些条件必然成立，而只要上述条件之<br>一不满足，就不会发生死锁。</p>
+<p>预防死锁：</p>
+<ol>
+<li>互斥条件<br>如果系统中的资源可以由多个进程共享，那么就永远不会发生死锁。然而，这种共享不切实际。例如，磁带机、绘图仪或打印机就不能在多个进程之间共享使用。这其中最好的情形就是对打印机使用假脱机技术，即所有打印请求都由一个单独的程序处理。这样可以消除共享请求。当假脱机程序占用打印机时，其他任何进程都不能发送打印机请求，也不能管理打印机。他们可以做的工作就是将数据提交给假脱机程序，以便以后打印。<br>不幸的是，并非所有的设备都可以使用相同的技术。而且，死锁涉及的除外部I/O设备之外，还包括各种操作系统表、磁盘区和记录等大量资源。此外，不是所有资源都可以采用假脱机这样简单的应用程序进行处理。因此，很难保证避免该条件。</li>
+<li>等待条件<br>禁止进程在已经占用某些资源时等待更多资源，这样可以预防死锁。<br>这要求进程一开始就声明它期望使用的全部资源。操作系统会检查这些资源是否全部可用，只有可用的时候，才允许该进程开始执行。这种情况下，显然操作系统在分配完资源之后必须更新自己的空闲及可用资源链表。该解决方案很吸引人，但显而易见的是，它不能达到预期效果而且很浪费。如果进程为了更新某些文件需要用8个小时时间，而最后只使用磁带机一分钟以更新控制记录，在整个过程中磁带机都要分配给那个进程。因此，磁带机会空闲8个小时。这期间没有其他的进程可以使用该磁带机。<br>可以采用该方法的另一种形式。操作系统必须让请求某些资源的进程先放弃已经占用的资源，然后再尝试请求所有要用的资源。如果尝试成功，被放弃的资源才可以重新分配给该进程，这样该进程才可以继续运行。如果失败，被放弃的资源恢复空闲，而进程则必须一直等到那些资源可用为止。每次检查后，进程都放弃已占用的资源，这样就永远不会出现死锁。<br>该方案也存在很多问题。当进程放弃现有资源之后，也许会有其他一些进程长时间占用一个或多个资源。很容易想象，该策略会导致长时间的延迟、无限期的推迟以及其他不可预测的问题。同样地，这种技术可用于表、信号量等共享资源，但不适用于打印机和磁带机这类资源。想象一下，某个进程在打印到一半的时候放弃使用打印机，而某个其他进程占用该打印机将产生什么样的后果。</li>
+<li>非抢占条件<br>确保不满足”非抢占”条件很困难。如果允许将资源分配给可以强制夺取该资源的进程，也许可以解决死锁问题，但会出现更糟糕的问题。从一个只处理了部分记录的进程强制性地夺走磁带机–因为其他进程请求使用该资源，由此带来的加载/卸载、定位等问题一定令人无法接受。对打印机而言，情形更糟糕。</li>
+<li>循环等待条件<br>显然，克服前三个条件很难，这样就只留下了最后一个条件。如果阻止了循环等待条件，那么也可以阻止死锁。<br>一种方法是强制进程每次只能占用一种资源。如果它希望使用另一种资源，就必须先放弃占用的资源，然后再请求。</li>
+</ol>
+<a id="more"></a>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="17-1-Explainwhathappens-stepbystep-afteryoutypeaURLintoabrowser-Useasmuch-detail-as-possible"><a href="#17-1-Explainwhathappens-stepbystep-afteryoutypeaURLintoabrowser-Useasmuch-detail-as-possible" class="headerlink" title="17.1 Explainwhathappens,stepbystep,afteryoutypeaURLintoabrowser Useasmuch detail as possible"></a><strong>17.1 Explainwhathappens,stepbystep,afteryoutypeaURLintoabrowser Useasmuch detail as possible</strong></h4><p>这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：</p>
+<ol>
+<li>浏览器向DNS服务器查找输入URL对应的IP地址。</li>
+<li>DNS服务器返回网站的IP地址。</li>
+<li>浏览器根据IP地址与目标web服务器在80端口上建立TCP连接</li>
+<li>浏览器获取请求页面的html代码。</li>
+<li>浏览器在显示窗口内渲染HTML。</li>
+<li>窗口关闭时，浏览器终止与服务器的连接。<br>这其中最有趣的是第1步和第2步(域名解析)。我们输入的网址(域名)是IP地址的一个别名， 在一个DNS内，一个域名对应一个IP地址。域名系统(DNS) 的工作就是将域名与它的IP地址对应起来。DNS是分布式的，同时也是具有层级关系的。<br>一个域名服务器虽然只记录一个小的子网内的主机名和IP地址， 但所有的域名服务器联合起来工作，就能将全网内的域名与它们的IP地址对应起来。 这也就意味着，如果一个域名服务器无法找到某个请求域名所对应的IP地址， 它就会向其它的域名服务器发出请求进行寻找。</li>
+</ol>
+<h4 id="17-2-Explain-any-common-routing-protocol-in-detail-For-example-BGP-OSPF-RIP"><a href="#17-2-Explain-any-common-routing-protocol-in-detail-For-example-BGP-OSPF-RIP" class="headerlink" title="17.2 Explain any common routing protocol in detail For example: BGP, OSPF, RIP"></a><strong>17.2 Explain any common routing protocol in detail For example: BGP, OSPF, RIP</strong></h4><p>BGP: Border Gateway Protocol (边界网关协议)<br>BGP是互联网上的一个核心路由协议。当BGP路由器第一次出现在互联网上时， 它会与那些和它能直接通信的其它BGP路由器建立连接。建立连接后的第一件事， 是从它相邻的路由器下载整个路由表。做完这件事后， 它与其它路由器就只需要交换少量更新信息即可。<br>BGP路由器通过发送和更新消息来表示到达给定IP地址的计算机的首选路径的变化。 如果一个BGP路由器发现一条新的更好的路径，它将更新自己的路由表， 并向与它直接连接的BGP路由器传播这个信息。 这些BGP路由器将依次决定是否更新自己的路由表及传播这个信息。</p>
+<p>RIP: Routing Information Protocol (路由信息协议)<br>RIP为局域网提供一个标准的IGP(内部网关协议)协议，它提供了非常好的网络稳定性， 可以保证当一个网络连接断开时，能快速地由另一个网络连接进行包的发送。<br>RIP的工作倚仗于一个路由数据库，其中保存了计算机之间的快速路由信息。 每次更新中，每一个路由器会去告诉其它路由器它认为哪条路由是最快的。 更新算法将保证每个路由会用与相邻路由通信得到的最快路由去更新它的数据库。</p>
+<p>OSPF: Open Shortest Path First (开放式最短路径优先协议)<br>OSPF是一个特别高效的IGP路由协议。它比RIP要快，但也更复杂。<br>OSPF和RIP的主要区别是：RIP只保存到达目标地址的下一跳路由的信息； 而OSPF保存了局域网内所有连接的拓扑结构。OSPF算法描述如下：<br>开始。当一个路由被打开，它向所有的邻居发送”hello”的数据包， 然后接收它们返回的”hello”包。如果它的邻接路由同意同步， 那么它们将建立连接并同步数据库。<br>更新。每隔一定的时间间隔，每个路由发送一个更新信息给其它路由。 这个更新信息叫“连接状态”，用于向其它路由描述当前路由的数据库信息。 这样一来，所有的路由都将保存相同的局域网拓扑描述。<br>最短路径树。每个路由会计算一个数据结构叫“最短路径树” 用于描述到达目标地址的最短路径。这样一来，在每次通信中就知道哪个路由是最近的。</p>
+<h4 id="17-3-Compare-and-contrast-the-IPv4-and-IPv6-protocols"><a href="#17-3-Compare-and-contrast-the-IPv4-and-IPv6-protocols" class="headerlink" title="17.3 Compare and contrast the IPv4 and IPv6 protocols"></a><strong>17.3 Compare and contrast the IPv4 and IPv6 protocols</strong></h4><p>IPv4和IPv6是因特网协议，应用于网络层。IPv4是现在应用得最广泛的协议， 而IPv6是因特网的下一代协议。<br>IPv4是因特网协议的第4个版本，它使用32位寻址技术。IPv6是下一代因特网协议， 用的是128位寻址。<br>IPv4最多允许4,294,967,296个独立IP地址，而IPv6可以允许34, 000, 000, 000, 000, 000, 000, 000, 000, 000, 000, 000, 000个IP地址。 (34后面带36个0)<br>IPv4中，IP地址分为以下几类：A，B，C，D和E。 A，B，C是3类实际在网络中使用的IP地址。D类地址为组播保留。E类地址是保留地址， 意味着它们不应该在IP网络上使用。(除非是一些研究机构出于实验目的才会使用)<br>IPv6地址大致可分为3类：<br>单播地址。一个单播地址就是一个单一接口的标识符。 一个发送到单播地址的IPv6报文会被传送到该地址所标识的接口。<br>组播地址。组播地址就是一组接口的标识符，这些接口可能属于不同的节点。 一个发送到组播地址的IPv6报文会被传送到多个接口。<br>任播地址(任一广播地址)。任播地址是一组接口的标识符， 这些接口可能属于不同节点(这点和组播地址相同)。一个发送到任播地址的IPv6 报文会被传送到这组接口中的其中一个。<br>IPv4地址表示：239.255.255.255, 255.255.255.0<br>IPv6地址用分号“:”分成8段，用16进制表示。比如： 2001:cdba:0000:0000:0000:0000:3257:9652<br>由于人口数量的增加(对IP地址的需求增加)，IPv6的需求日益明显，它能带来以下好处：<br>增加地址空间<br>更高效的路由<br>降低管理要求<br>改善更换ISP的方法<br>更好的移动支持<br>多宿主<br>安全<br>作用域地址：本地链路，本地站点和全局地址空间</p>
+<h4 id="18-1-What’s-the-difference-between-a-thread-and-a-process"><a href="#18-1-What’s-the-difference-between-a-thread-and-a-process" class="headerlink" title="18.1 What’s the difference between a thread and a process?"></a><strong>18.1 What’s the difference between a thread and a process?</strong></h4><p>进程是系统进行资源分配的基本单位，有独立的内存地址空间； 线程是CPU调度的基本单位，没有单独地址空间，有独立的栈，局部变量，寄存器， 程序计数器等。<br>创建进程的开销大，包括创建虚拟地址空间等需要大量系统资源； 创建线程开销小，基本上只有一个内核对象和一个堆栈。<br>一个进程无法直接访问另一个进程的资源；同一进程内的多个线程共享进程的资源。<br>进程切换开销大，线程切换开销小；进程间通信开销大，线程间通信开销小。<br>线程属于进程，不能独立执行；每个进程至少要有一个线程，成为主线程。</p>
+<h4 id="18-2-How-can-you-measure-the-time-spent-in-a-context-switch"><a href="#18-2-How-can-you-measure-the-time-spent-in-a-context-switch" class="headerlink" title="18.2 How can you measure the time spent in a context switch?"></a><strong>18.2 How can you measure the time spent in a context switch?</strong></h4><p>这是一个棘手的问题，让我们先从可能的解答入手。<br>上下文切换(有时也称为进程切换或任务切换)是指CPU 的控制权从一个进程或线程切换到另一个。 （参考资料） 例如让一个正在执行的进程进入等待状态(或终止它)，同时去执行另一个正在等待的进程。 上下文切换一般发生在多任务系统中，操作系统必须把等待进程的状态信息载入内存， 同时保存正在运行的进程的状态信息(因为它马上就要变成等待状态了)。<br>为了解决这个问题，我们需要记录两个进程切换时第一条指令和最后一条指令的时间戳， 上下文切换就是这两个时间戳的差。<br>来看一个简单的例子，假设只有两个进程：P1和P2。<br>P1正在执行，而P2在等待。在某个时刻，操作系统从P1切换到P2。假设此时， P1执行到第N条指令，记录时间戳Time_Stamp(P1_N)，当本来在等待的P2 开始执行第1条指令，说明切换完成，记录时间戳Time_Stamp(P2_1)。因此， 上下文切换的时间为：Time_Stamp(P2_1) - Time_Stamp(P1_N)<br>思路非常简单。问题在于，我们如何知道上下文切换是何时发生的？ 进程的切换是由操作系统的调度算法决定的。我们也无法记录进程中每个指令的时间戳。<br>另一个问题是：许多内核级线程也做上下文切换，而用户对于它们是没有任何控制权限的。<br>总而言之，我们可以认为，这最多只能是依赖于底层操作系统的近似计算。 一个近似的解法是记录一个进程结束时的时间戳，另一个进程开始的时间戳及排除等待时间。<br>如果所有进程总共用时为T，那么总的上下文切换时间为： T - (所有进程的等待时间和执行时间)</p>
+
       
     </div>
 
@@ -316,6 +375,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
       
 
       
@@ -355,7 +422,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/07/17/C15/"
-           data-title="C15" data-url="http://yoursite.com/2016/07/17/C15/">
+           data-title="Ctci 读书笔记（十六）" data-url="http://yoursite.com/2016/07/17/C15/">
       </div>
     
   </div>
@@ -446,7 +513,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-17-Networking-amp-Threads-and-Locks"><span class="nav-number">1.</span> <span class="nav-text">Chapter 17 Networking & Threads and Locks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OSI"><span class="nav-number">1.0.1.</span> <span class="nav-text">OSI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deadlock"><span class="nav-number">1.0.2.</span> <span class="nav-text">Deadlock</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#17-1-Explainwhathappens-stepbystep-afteryoutypeaURLintoabrowser-Useasmuch-detail-as-possible"><span class="nav-number">1.1.1.</span> <span class="nav-text">17.1 Explainwhathappens,stepbystep,afteryoutypeaURLintoabrowser Useasmuch detail as possible</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-2-Explain-any-common-routing-protocol-in-detail-For-example-BGP-OSPF-RIP"><span class="nav-number">1.1.2.</span> <span class="nav-text">17.2 Explain any common routing protocol in detail For example: BGP, OSPF, RIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-3-Compare-and-contrast-the-IPv4-and-IPv6-protocols"><span class="nav-number">1.1.3.</span> <span class="nav-text">17.3 Compare and contrast the IPv4 and IPv6 protocols</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-1-What’s-the-difference-between-a-thread-and-a-process"><span class="nav-number">1.1.4.</span> <span class="nav-text">18.1 What’s the difference between a thread and a process?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-2-How-can-you-measure-the-time-spent-in-a-context-switch"><span class="nav-number">1.1.5.</span> <span class="nav-text">18.2 How can you measure the time spent in a context switch?</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
